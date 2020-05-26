@@ -1,8 +1,11 @@
 TOKEN = '1123378208:AAFnDmS4CA5aRsJYHYfvm8e-s_E6YIRYxxo'
 import telegram
 import time
-
 # import RPi.GPIO as GPIO
+import csv
+import datetime
+
+
 
 bot = telegram.Bot(TOKEN)
 print(bot.get_me())
@@ -43,18 +46,17 @@ passed_ids = []
 def password_check(t):
     q=t
     g=0
+    prevmessage=''
     while (True):
-
         updates = bot.get_updates()
         message = [u.message.text for u in updates]
         chat_id = bot.get_updates()[-1].message.chat_id
-        prevmessage=''
+
         while (q < 1):  # first time initialize
             prevmessage = message[-1]
             q = q + 1
 
-
-        if (message[-1] == prevmessage):  # to prevent it from sending messages even if
+        if (message[-1] == prevmessage):  # to prevent it from sending messages even if user hasn't send any message
             continue
         else:
             prevmessage = message[-1]
@@ -120,6 +122,12 @@ while (True):
     bot.send_message(chat_id, text)
     time.sleep(3)
 
+    with open('log.csv', 'a+', newline='') as file:                                     #logging in csv
+        writer = csv.writer(file)
+        writer.writerow([name, message[-1], datetime.datetime.now()])
+
+
+
     if 'on' in recentmessage.lower():
         ref = "Turned on "
         if 'led' in recentmessage.lower():
@@ -166,4 +174,7 @@ while (True):
 
     else:
         bot.send_message(chat_id, "INVALID COMMAND! TRY AGAIN")
+
+
+
     time.sleep(4)
