@@ -12,7 +12,8 @@ bot = telegram.Bot(TOKEN)
 i = 0
 prevmessage = 'dds'
 ids = {}
-
+fan=10
+lights=10
 def save_pass_to_file(pas):
     f = open('r.txt', 'w')
     f.write(str(pas))
@@ -174,20 +175,32 @@ while (True):
             ref = "Turned on "
             if 'led' in recentmessage.lower():
                 ref = ref + "led" + ", Task Completed!!"
-                # GPIO.output(led, 1)
-                bot.send_message(chat_id, ref)
+                if lights==1:
+                    bot.send_message(chat_id, "Lights are already ON!!")
+                else:
+                    # GPIO.output(led, 1)
+                    bot.send_message(chat_id, ref)
+                    lights=1
                 continue
 
             if 'fan' in recentmessage.lower():
                 ref = ref + "fan" + ", Task Completed!!"
-                # GPIO.output(fan, 1)
-                bot.send_message(chat_id, ref)
+                if fan == 1:
+                    bot.send_message(chat_id, "Fan is already ON!!")
+                else:
+                    # GPIO.output(led, 1)
+                    bot.send_message(chat_id, ref)
+                    fan=1
                 continue
 
             if 'light' in recentmessage.lower():
                 ref = ref + "light" + ", Task Completed!!"
-                # GPIO.output(led, 1)
-                bot.send_message(chat_id, ref)
+                if lights == 1:
+                    bot.send_message(chat_id, "Lights are already ON!!")
+                else:
+                    # GPIO.output(led, 1)
+                    bot.send_message(chat_id, ref)
+                    lights=1
                 continue
             else:
                 bot.send_message(chat_id, "Invalid command, please try again and specify the appliance properly!")
@@ -196,20 +209,33 @@ while (True):
             ref = "Turned off "
             if 'led' in recentmessage.lower():
                 ref = ref + "led" + ", Task Completed!!"
-                # GPIO.output(led, 0)
-                bot.send_message(chat_id, ref)
+                if lights == 0:
+                    bot.send_message(chat_id, "Lights are already OFF!!")
+                else:
+                    # GPIO.output(led, 1)
+                    bot.send_message(chat_id, ref)
+                    lights=0
                 continue
 
             if 'fan' in recentmessage.lower():
                 ref = ref + "fan" + ", Task Completed!!"
-                # GPIO.output(fan, 0)
-                bot.send_message(chat_id, ref)
+                if fan == 0:
+                    bot.send_message(chat_id, "Fan is already OFF!!")
+                    print(456)
+                else:
+                    # GPIO.output(led, 1)
+                    bot.send_message(chat_id, ref)
+                    fan=0
                 continue
 
-            if 'light' in recentmessage.lower():
+            if 'light' or 'lights' in recentmessage.lower():
                 ref = ref + "light" + ", Task Completed!!"
-                # GPIO.output(led, 0)
-                bot.send_message(chat_id, ref)
+                if lights == 0:
+                    bot.send_message(chat_id, "Lights are already OFF!!")
+                else:
+                    # GPIO.output(led, 1)
+                    bot.send_message(chat_id, ref)
+                    lights=0
                 continue
             else:
                 bot.send_message(chat_id, "Invalid command, please try again and specify the appliance properly!")
