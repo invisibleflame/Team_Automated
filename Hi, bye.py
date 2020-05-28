@@ -13,7 +13,18 @@ i = 0
 prevmessage = 'dds'
 ids = {}
 
-password = "freshies"
+def save_pass_to_file(pas):
+    f = open('r.txt', 'w')
+    f.write(str(pas))
+    f.close()
+
+
+def load_pass_from_file():
+    f = open('r.txt', 'r')
+    dat = f.read()
+    f.close()
+    return dat
+password=load_pass_from_file()
 
 
 def save_dict_to_file(dic):
@@ -35,6 +46,7 @@ def get_key(val):
             return key
 
     return "key doesn't exist"
+
 
 
 text = ''
@@ -136,7 +148,17 @@ while (True):
             ref = "I can help you turn on / off your devices. Enter the command and the name of device "
             bot.send_message(chat_id, ref)
         continue
+    elif 'password' in recentmessage.lower():
+        if 'change' or 'new' in recentmessage.lower():
+            password_check(-1)
+            bot.send_message(chat_id, "Please enter the new password ")
+            uf = bot.get_updates()
+            mesge = [u.message.text for u in uf]
+            password=mesge[-1]
 
+            prevmessage=mesge[-1]
+            save_pass_to_file(password)
+            continue
 
     else:
         name = get_key(chat_id)
