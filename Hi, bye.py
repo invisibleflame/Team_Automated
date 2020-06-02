@@ -174,9 +174,17 @@ while (True):
             msg.add_alternative(f"""\
             <!DOCTYPE html>
             <html>
-                <body>
-                    <h1 style="color:SlateGray; font-style:bold"> The password was changed to {password} by {name} at {datetime.datetime.now()}.  </h1>
-                </body>
+            <body>
+            <div class="pass-change" style="font-family:'Times New Roman', Times, serif;    background-color: rgb(31, 20, 20);    text-align: center;    border-radius: 10px;    padding: 10px;">
+            <p class="header" style="font-family: Georgia, 'Times New Roman', Times, serif;        font-size: 40px;        font-weight: bold;            color: white;">Hello, Team Automated!!</p>
+            <p class="second-head" style="font-size: 30px;        font-weight: bold;        color: red;">An importand mail from SASHA.</p>
+            <p class="content" style="  font-size: 20px;        color: wheat;"> The password for SASHA is changed to {password} by {name} at {datetime.datetime.now()}. </p>
+             </div>
+            <div class="footer" style=" text-align: center;    color: black;">
+            This is a auto-generated mail. Do not reply to this thread. <br>
+            Copyright &copy; SASHA, Team_Automated, 2020.
+            </div>
+            </body>
             </html>
             """, subtype='html')
 
