@@ -80,7 +80,7 @@ def password_check(t):
         ud = bot.get_updates()
         mesage = [u.message.text for u in ud]
         if mesage[-1] == password:
-            bot.send_message(chat_id, "Password Accepted!")
+            bot.send_message(chat_id, "Password Accepted! Please enter your command!")
             passed_ids.append(chat_id)
             time.sleep(10)
             break
@@ -153,7 +153,8 @@ while (True):
         continue
     elif 'password' in recentmessage.lower():
         if 'change' or 'new' in recentmessage.lower():
-            password_check(-1)
+            prevmessage=recentmessage
+            password_check(1)
             bot.send_message(chat_id, "Please enter the new password ")
             uf = bot.get_updates()
             mesge = [u.message.text for u in uf]
@@ -161,6 +162,7 @@ while (True):
 
             prevmessage=mesge[-1]
             save_pass_to_file(password)
+            nm=get_key(chat_id)
 
             #send email
             server = smtplib.SMTP_SSL("smtp.gmail.com", 465)
@@ -178,7 +180,7 @@ while (True):
             <div class="pass-change" style="font-family:'Times New Roman', Times, serif;    background-color: rgb(31, 20, 20);    text-align: center;    border-radius: 10px;    padding: 10px;">
             <p class="header" style="font-family: Georgia, 'Times New Roman', Times, serif;        font-size: 40px;        font-weight: bold;            color: white;">Hello, Team Automated!!</p>
             <p class="second-head" style="font-size: 30px;        font-weight: bold;        color: red;">An importand mail from SASHA.</p>
-            <p class="content" style="  font-size: 20px;        color: wheat;"> The password for SASHA is changed to {password} by {name} at {datetime.datetime.now()}. </p>
+            <p class="content" style="  font-size: 20px;        color: wheat;"> The password for SASHA is changed to {password} by {nm} at {datetime.datetime.now()}. </p>
              </div>
             <div class="footer" style=" text-align: center;    color: black;">
             This is a auto-generated mail. Do not reply to this thread. <br>
@@ -191,6 +193,7 @@ while (True):
             server.login("team.automatediitb@gmail.com", "SASHAsasha")
             server.send_message(msg)
             server.quit()
+            bot.send_message(chat_id, "Password changed successfully!! Please enter your command now!")
             continue
 
     else:
