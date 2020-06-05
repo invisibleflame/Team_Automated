@@ -179,8 +179,8 @@ while (True):
             <body>
             <div class="pass-change" style="font-family:'Times New Roman', Times, serif;    background-color: rgb(31, 20, 20);    text-align: center;    border-radius: 10px;    padding: 10px;">
             <p class="header" style="font-family: Georgia, 'Times New Roman', Times, serif;        font-size: 40px;        font-weight: bold;            color: white;">Hello, Team Automated!!</p>
-            <p class="second-head" style="font-size: 30px;        font-weight: bold;        color: red;">An importand mail from SASHA.</p>
-            <p class="content" style="  font-size: 20px;        color: wheat;"> The password for SASHA is changed to {password} by {nm} at {datetime.datetime.now()}. </p>
+            <p class="second-head" style="font-size: 30px;        font-weight: bold;        color: red;">An important mail from SASHA.</p>
+            <p class="content" style="  font-size: 20px;        color: wheat;"> The password for SASHA is changed to '{password}' by {nm} at {datetime.datetime.now()}. </p>
              </div>
             <div class="footer" style=" text-align: center;    color: black;">
             This is an auto-generated mail. Do not reply to this thread. <br>
