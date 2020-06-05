@@ -183,7 +183,7 @@ while (True):
             <p class="content" style="  font-size: 20px;        color: wheat;"> The password for SASHA is changed to {password} by {nm} at {datetime.datetime.now()}. </p>
              </div>
             <div class="footer" style=" text-align: center;    color: black;">
-            This is a auto-generated mail. Do not reply to this thread. <br>
+            This is an auto-generated mail. Do not reply to this thread. <br>
             Copyright &copy; SASHA, Team_Automated, 2020.
             </div>
             </body>
