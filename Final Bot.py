@@ -7,7 +7,12 @@ import csv
 import datetime
 import smtplib
 from email.message import EmailMessage
+from newsapi import NewsApiClient
+import requests
+from gtts import gTTS
+newsapi = NewsApiClient(api_key='1cec50aadff94c538a68e0d626bdb1f4')
 
+city_list=['port blair', 'andhra pradesh', 'adoni', 'amaravati', 'anantapur', 'chandragiri', 'chittoor', 'dowlaiswaram', 'eluru', 'guntur', 'kadapa', 'kakinada', 'kurnool', 'machilipatnam', 'nagarjunako??a', 'rajahmundry', 'srikakulam', 'tirupati', 'vijayawada', 'visakhapatnam', 'vizianagaram', 'yemmiganur', 'arunachal pradesh', 'itanagar', 'assam', 'dhuburi', 'dibrugarh', 'dispur', 'guwahati', 'jorhat', 'nagaon', 'sibsagar', 'silchar', 'tezpur', 'tinsukia', 'bihar', 'ara', 'baruni', 'begusarai', 'bettiah', 'bhagalpur', 'bihar sharif', 'bodh gaya', 'buxar', 'chapra', 'darbhanga', 'dehri', 'dinapur nizamat', 'gaya', 'hajipur', 'jamalpur', 'katihar', 'madhubani', 'motihari', 'munger', 'muzaffarpur', 'patna', 'purnia', 'pusa', 'saharsa', 'samastipur', 'sasaram', 'sitamarhi', 'siwan', 'chandigarh (union territory)', 'chandigarh', 'chhattisgarh', 'ambikapur', 'bhilai', 'bilaspur', 'dhamtari', 'durg', 'jagdalpur', 'raipur', 'rajnandgaon', 'dadra and nagar haveli (union territory)', 'silvassa', 'daman and diu (union territory)', 'daman', 'diu', 'delhi (national capital territory)', 'delhi', 'new delhi', 'goa', 'madgaon', 'panaji', 'gujarat', 'ahmadabad', 'amreli', 'bharuch', 'bhavnagar', 'bhuj', 'dwarka', 'gandhinagar', 'godhra', 'jamnagar', 'junagadh', 'kandla', 'khambhat', 'kheda', 'mahesana', 'morvi', 'nadiad', 'navsari', 'okha', 'palanpur', 'patan', 'porbandar', 'rajkot', 'surat', 'surendranagar', 'valsad', 'veraval', 'haryana', 'ambala', 'bhiwani', 'chandigarh', 'faridabad', 'firozpur jhirka', 'gurgaon', 'hansi', 'hisar', 'jind', 'kaithal', 'karnal', 'kurukshetra', 'panipat', 'pehowa', 'rewari', 'rohtak', 'sirsa', 'sonipat', 'himachal pradesh', 'bilaspur', 'chamba', 'dalhousie', 'dharmshala', 'hamirpur', 'kangra', 'kullu', 'mandi', 'nahan', 'shimla', 'una', 'jammu and kashmir', 'anantnag', 'baramula', 'doda', 'gulmarg', 'jammu', 'kathua', 'leh', 'punch', 'rajauri', 'srinagar', 'udhampur', 'jharkhand', 'bokaro', 'chaibasa', 'deoghar', 'dhanbad', 'dumka', 'giridih', 'hazaribag', 'jamshedpur', 'jharia', 'rajmahal', 'ranchi', 'saraikela', 'karnataka', 'badami', 'ballari', 'bangalore', 'belgavi', 'bhadravati', 'bidar', 'chikkamagaluru', 'chitradurga', 'davangere', 'halebid', 'hassan', 'hubballi-dharwad', 'kalaburagi', 'kolar', 'madikeri', 'mandya', 'mangaluru', 'mysuru', 'raichur', 'shivamogga', 'shravanabelagola', 'shrirangapattana', 'tumkuru', 'kerala', 'alappuzha', 'badagara', 'idukki', 'kannur', 'kochi', 'kollam', 'kottayam', 'kozhikode', 'mattancheri', 'palakkad', 'thalassery', 'thiruvananthapuram', 'thrissur', 'madhya pradesh', 'balaghat', 'barwani', 'betul', 'bharhut', 'bhind', 'bhojpur', 'bhopal', 'burhanpur', 'chhatarpur', 'chhindwara', 'damoh', 'datia', 'dewas', 'dhar', 'guna', 'gwalior', 'hoshangabad', 'indore', 'itarsi', 'jabalpur', 'jhabua', 'khajuraho', 'khandwa', 'khargon', 'maheshwar', 'mandla', 'mandsaur', 'mhow', 'morena', 'murwara', 'narsimhapur', 'narsinghgarh', 'narwar', 'neemuch', 'nowgong', 'orchha', 'panna', 'raisen', 'rajgarh', 'ratlam', 'rewa', 'sagar', 'sarangpur', 'satna', 'sehore', 'seoni', 'shahdol', 'shajapur', 'sheopur', 'shivpuri', 'ujjain', 'vidisha', 'maharashtra', 'ahmadnagar', 'akola', 'amravati', 'aurangabad', 'bhandara', 'bhusawal', 'bid', 'buldana', 'chandrapur', 'daulatabad', 'dhule', 'jalgaon', 'kalyan', 'karli', 'kolhapur', 'mahabaleshwar', 'malegaon', 'matheran', 'mumbai', 'nagpur', 'nanded', 'nashik', 'osmanabad', 'pandharpur', 'parbhani', 'pune', 'ratnagiri', 'sangli', 'satara', 'sevagram', 'solapur', 'thane', 'ulhasnagar', 'vasai-virar', 'wardha', 'yavatmal', 'manipur', 'imphal', 'meghalaya', 'cherrapunji', 'shillong', 'mizoram', 'aizawl', 'lunglei', 'nagaland', 'kohima', 'mon', 'phek', 'wokha', 'zunheboto', 'odisha', 'balangir', 'baleshwar', 'baripada', 'bhubaneshwar', 'brahmapur', 'cuttack', 'dhenkanal', 'keonjhar', 'konark', 'koraput', 'paradip', 'phulabani', 'puri', 'sambalpur', 'udayagiri', 'puducherry (union territory)', 'karaikal', 'mahe', 'puducherry', 'yanam', 'punjab', 'amritsar', 'batala', 'chandigarh', 'faridkot', 'firozpur', 'gurdaspur', 'hoshiarpur', 'jalandhar', 'kapurthala', 'ludhiana', 'nabha', 'patiala', 'rupnagar', 'sangrur', 'rajasthan', 'abu', 'ajmer', 'alwar', 'amer', 'barmer', 'beawar', 'bharatpur', 'bhilwara', 'bikaner', 'bundi', 'chittaurgarh', 'churu', 'dhaulpur', 'dungarpur', 'ganganagar', 'hanumangarh', 'jaipur', 'jaisalmer', 'jalor', 'jhalawar', 'jhunjhunu', 'jodhpur', 'kishangarh', 'kota', 'merta', 'nagaur', 'nathdwara', 'pali', 'phalodi', 'pushkar', 'sawai madhopur', 'shahpura', 'sikar', 'sirohi', 'tonk', 'udaipur', 'sikkim', 'gangtok', 'gyalsing', 'lachung', 'mangan', 'tamil nadu', 'arcot', 'chengalpattu', 'chennai', 'chidambaram', 'coimbatore', 'cuddalore', 'dharmapuri', 'dindigul', 'erode', 'kanchipuram', 'kanniyakumari', 'kodaikanal', 'kumbakonam', 'madurai', 'mamallapuram', 'nagappattinam', 'nagercoil', 'palayankottai', 'pudukkottai', 'rajapalaiyam', 'ramanathapuram', 'salem', 'thanjavur', 'tiruchchirappalli', 'tirunelveli', 'tiruppur', 'tuticorin', 'udhagamandalam', 'vellore', 'telangana', 'hyderabad', 'karimnagar', 'khammam', 'mahbubnagar', 'nizamabad', 'sangareddi', 'warangal', 'tripura', 'agartala', 'uttar pradesh', 'agra', 'aligarh', 'amroha', 'ayodhya', 'azamgarh', 'bahraich', 'ballia', 'banda', 'bara banki', 'bareilly', 'basti', 'bijnor', 'bithur', 'budaun', 'bulandshahr', 'deoria', 'etah', 'etawah', 'faizabad', 'farrukhabad-cum-fatehgarh', 'fatehpur', 'fatehpur sikri', 'ghaziabad', 'ghazipur', 'gonda', 'gorakhpur', 'hamirpur', 'hardoi', 'hathras', 'jalaun', 'jaunpur', 'jhansi', 'kannauj', 'kanpur', 'lakhimpur', 'lalitpur', 'lucknow', 'mainpuri', 'mathura', 'meerut', 'mirzapur-vindhyachal', 'moradabad', 'muzaffarnagar', 'partapgarh', 'pilibhit', 'prayagraj', 'rae bareli', 'rampur', 'saharanpur', 'sambhal', 'shahjahanpur', 'sitapur', 'sultanpur', 'tehri', 'varanasi', 'uttarakhand', 'almora', 'dehra dun', 'haridwar', 'mussoorie', 'nainital', 'pithoragarh', 'west bengal', 'alipore', 'alipur duar', 'asansol', 'baharampur', 'bally', 'balurghat', 'bankura', 'baranagar', 'barasat', 'barrackpore', 'basirhat', 'bhatpara', 'bishnupur', 'budge budge', 'burdwan', 'chandernagore', 'darjiling', 'diamond harbour', 'dum dum', 'durgapur', 'halisahar', 'haora', 'hugli', 'ingraj bazar', 'jalpaiguri', 'kalimpong', 'kamarhati', 'kanchrapara', 'kharagpur', 'koch bihar', 'kolkata', 'krishnanagar', 'malda', 'midnapore', 'murshidabad', 'navadwip', 'palashi', 'panihati', 'purulia', 'raiganj', 'santipur', 'shantiniketan', 'shrirampur', 'siliguri', 'siuri', 'tamluk', 'titagarh']
 bot = telegram.Bot(TOKEN)
 print(bot.get_me())
 bot = telegram.Bot(TOKEN)
@@ -234,6 +239,34 @@ while (True):
             server.quit()
             bot.send_message(chat_id, "Password changed successfully!! Please enter your command now!")
             continue
+    elif 'weather' in recentmessage.lower():
+        found=False
+        for i in range(539):
+            if city_list[i] in recentmessage.lower():
+                city=city_list[i]
+                found=True
+                break
+        if not found:
+            bot.send_message(chat_id, "Please check the name of the city entered and try again")
+            continue
+        url = 'http://api.openweathermap.org/data/2.5/weather?q=' + city + '&appid=3c44c91488c5b35ec2dc81d21cbc95ae'
+        json_data = requests.get(url).json()
+
+        # formatted_data= json_data['weather'][0]['main'] for just weather title
+        formatted_data = [json_data['weather'][0]['description'], json_data['main']['temp'],
+                          json_data['main']['pressure'], json_data['main']['humidity'], "dsf",
+                          json_data['wind']['speed']]
+        lol = f'''Current weather conditons in {city}:
+        Cloudiness: {formatted_data[0]}
+        Temperature: {formatted_data[1]} K
+        Pressure: {formatted_data[2]} hpa
+        Humidity: {formatted_data[3]} %
+        Windspeed: {formatted_data[5]} m/s'''
+        bot.send_message(chat_id, lol)
+        continue
+
+
+
 
     else:
         name = get_key(chat_id)
