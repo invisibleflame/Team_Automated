@@ -325,7 +325,7 @@ while (True):
         bot.send_message(chat_id, text)
         bot.send_audio(chat_id=chat_id, audio=open('welcome.mp3', 'rb'))
         continue
-    elif "jokes" or "humor" or "humour" in recentmessage.lower():
+    elif "jokes" in recentmessage.lower() or "joke" in recentmessage.lower() or "humor" in recentmessage.lower() or "humour" in recentmessage.lower():
         random_joke=random.choice(jokes_list)
         bot.send_message(chat_id, random_joke)
         continue
