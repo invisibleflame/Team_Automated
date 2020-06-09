@@ -2,6 +2,7 @@
 TOKEN = '1237103929:AAH-UDwFKEuS_NlZGJifnv2tavcTXsF0gg4'
 import telegram
 import time
+import random
 # import RPi.GPIO as GPIO
 import csv
 import datetime
@@ -12,7 +13,33 @@ import requests
 from gtts import gTTS
 newsapi = NewsApiClient(api_key='1cec50aadff94c538a68e0d626bdb1f4')
 
+
+jokes_list=["Q: What’s the difference between England and a tea bag? "
+            "A: The tea bag stays in the cup longer.",
+            "A dyslexic man walks into a bra.",
+            "A man walks into a bar with a roll of tarmac under his arm and says: “Pint please… and one for the road.",
+            "I went to the doctor the other day and said: “Have you got anything for wind?” So he gave me a kite.",
+            "I went to the zoo the other day. There was only a dog in it – it was a shihtzu.",
+            "Two fish in a tank. One says: “How do you drive this thing?”",
+            "A woman gets on a bus with her baby.   The driver says “Ugh – that’s the ugliest baby I’ve ever seen!”   "
+            "The woman walks to the back of the bus and sits down."
+            " She says to the man next to her: “The driver just insulted me!”"
+            "The man says: “You go up there and tell him off. Go on. I’ll hold your monkey for you.",
+            "Two men walk into a bar.   The third one DUCKS",
+            "Why was six afraid of 7?   Because 7 ate 9",
+            "You can't trust atoms! They make up everything.",
+            "Why do potatoes argue?  Because they can't see eye to eye!",
+            "Did u get a haircut? No I got them all cut!",
+            "Why did the cat run away from the tree? because it was afraid of the bark!",
+            "Why don't eggs tell each other jokes?   Because they would crack each other up!"]
 city_list=['port blair', 'andhra pradesh', 'adoni', 'amaravati', 'anantapur', 'chandragiri', 'chittoor', 'dowlaiswaram', 'eluru', 'guntur', 'kadapa', 'kakinada', 'kurnool', 'machilipatnam', 'nagarjunako??a', 'rajahmundry', 'srikakulam', 'tirupati', 'vijayawada', 'visakhapatnam', 'vizianagaram', 'yemmiganur', 'arunachal pradesh', 'itanagar', 'assam', 'dhuburi', 'dibrugarh', 'dispur', 'guwahati', 'jorhat', 'nagaon', 'sibsagar', 'silchar', 'tezpur', 'tinsukia', 'bihar', 'ara', 'baruni', 'begusarai', 'bettiah', 'bhagalpur', 'bihar sharif', 'bodh gaya', 'buxar', 'chapra', 'darbhanga', 'dehri', 'dinapur nizamat', 'gaya', 'hajipur', 'jamalpur', 'katihar', 'madhubani', 'motihari', 'munger', 'muzaffarpur', 'patna', 'purnia', 'pusa', 'saharsa', 'samastipur', 'sasaram', 'sitamarhi', 'siwan', 'chandigarh (union territory)', 'chandigarh', 'chhattisgarh', 'ambikapur', 'bhilai', 'bilaspur', 'dhamtari', 'durg', 'jagdalpur', 'raipur', 'rajnandgaon', 'dadra and nagar haveli (union territory)', 'silvassa', 'daman and diu (union territory)', 'daman', 'diu', 'delhi (national capital territory)', 'delhi', 'new delhi', 'goa', 'madgaon', 'panaji', 'gujarat', 'ahmadabad', 'amreli', 'bharuch', 'bhavnagar', 'bhuj', 'dwarka', 'gandhinagar', 'godhra', 'jamnagar', 'junagadh', 'kandla', 'khambhat', 'kheda', 'mahesana', 'morvi', 'nadiad', 'navsari', 'okha', 'palanpur', 'patan', 'porbandar', 'rajkot', 'surat', 'surendranagar', 'valsad', 'veraval', 'haryana', 'ambala', 'bhiwani', 'chandigarh', 'faridabad', 'firozpur jhirka', 'gurgaon', 'hansi', 'hisar', 'jind', 'kaithal', 'karnal', 'kurukshetra', 'panipat', 'pehowa', 'rewari', 'rohtak', 'sirsa', 'sonipat', 'himachal pradesh', 'bilaspur', 'chamba', 'dalhousie', 'dharmshala', 'hamirpur', 'kangra', 'kullu', 'mandi', 'nahan', 'shimla', 'una', 'jammu and kashmir', 'anantnag', 'baramula', 'doda', 'gulmarg', 'jammu', 'kathua', 'leh', 'punch', 'rajauri', 'srinagar', 'udhampur', 'jharkhand', 'bokaro', 'chaibasa', 'deoghar', 'dhanbad', 'dumka', 'giridih', 'hazaribag', 'jamshedpur', 'jharia', 'rajmahal', 'ranchi', 'saraikela', 'karnataka', 'badami', 'ballari', 'bangalore', 'belgavi', 'bhadravati', 'bidar', 'chikkamagaluru', 'chitradurga', 'davangere', 'halebid', 'hassan', 'hubballi-dharwad', 'kalaburagi', 'kolar', 'madikeri', 'mandya', 'mangaluru', 'mysuru', 'raichur', 'shivamogga', 'shravanabelagola', 'shrirangapattana', 'tumkuru', 'kerala', 'alappuzha', 'badagara', 'idukki', 'kannur', 'kochi', 'kollam', 'kottayam', 'kozhikode', 'mattancheri', 'palakkad', 'thalassery', 'thiruvananthapuram', 'thrissur', 'madhya pradesh', 'balaghat', 'barwani', 'betul', 'bharhut', 'bhind', 'bhojpur', 'bhopal', 'burhanpur', 'chhatarpur', 'chhindwara', 'damoh', 'datia', 'dewas', 'dhar', 'guna', 'gwalior', 'hoshangabad', 'indore', 'itarsi', 'jabalpur', 'jhabua', 'khajuraho', 'khandwa', 'khargon', 'maheshwar', 'mandla', 'mandsaur', 'mhow', 'morena', 'murwara', 'narsimhapur', 'narsinghgarh', 'narwar', 'neemuch', 'nowgong', 'orchha', 'panna', 'raisen', 'rajgarh', 'ratlam', 'rewa', 'sagar', 'sarangpur', 'satna', 'sehore', 'seoni', 'shahdol', 'shajapur', 'sheopur', 'shivpuri', 'ujjain', 'vidisha', 'maharashtra', 'ahmadnagar', 'akola', 'amravati', 'aurangabad', 'bhandara', 'bhusawal', 'bid', 'buldana', 'chandrapur', 'daulatabad', 'dhule', 'jalgaon', 'kalyan', 'karli', 'kolhapur', 'mahabaleshwar', 'malegaon', 'matheran', 'mumbai', 'nagpur', 'nanded', 'nashik', 'osmanabad', 'pandharpur', 'parbhani', 'pune', 'ratnagiri', 'sangli', 'satara', 'sevagram', 'solapur', 'thane', 'ulhasnagar', 'vasai-virar', 'wardha', 'yavatmal', 'manipur', 'imphal', 'meghalaya', 'cherrapunji', 'shillong', 'mizoram', 'aizawl', 'lunglei', 'nagaland', 'kohima', 'mon', 'phek', 'wokha', 'zunheboto', 'odisha', 'balangir', 'baleshwar', 'baripada', 'bhubaneshwar', 'brahmapur', 'cuttack', 'dhenkanal', 'keonjhar', 'konark', 'koraput', 'paradip', 'phulabani', 'puri', 'sambalpur', 'udayagiri', 'puducherry (union territory)', 'karaikal', 'mahe', 'puducherry', 'yanam', 'punjab', 'amritsar', 'batala', 'chandigarh', 'faridkot', 'firozpur', 'gurdaspur', 'hoshiarpur', 'jalandhar', 'kapurthala', 'ludhiana', 'nabha', 'patiala', 'rupnagar', 'sangrur', 'rajasthan', 'abu', 'ajmer', 'alwar', 'amer', 'barmer', 'beawar', 'bharatpur', 'bhilwara', 'bikaner', 'bundi', 'chittaurgarh', 'churu', 'dhaulpur', 'dungarpur', 'ganganagar', 'hanumangarh', 'jaipur', 'jaisalmer', 'jalor', 'jhalawar', 'jhunjhunu', 'jodhpur', 'kishangarh', 'kota', 'merta', 'nagaur', 'nathdwara', 'pali', 'phalodi', 'pushkar', 'sawai madhopur', 'shahpura', 'sikar', 'sirohi', 'tonk', 'udaipur', 'sikkim', 'gangtok', 'gyalsing', 'lachung', 'mangan', 'tamil nadu', 'arcot', 'chengalpattu', 'chennai', 'chidambaram', 'coimbatore', 'cuddalore', 'dharmapuri', 'dindigul', 'erode', 'kanchipuram', 'kanniyakumari', 'kodaikanal', 'kumbakonam', 'madurai', 'mamallapuram', 'nagappattinam', 'nagercoil', 'palayankottai', 'pudukkottai', 'rajapalaiyam', 'ramanathapuram', 'salem', 'thanjavur', 'tiruchchirappalli', 'tirunelveli', 'tiruppur', 'tuticorin', 'udhagamandalam', 'vellore', 'telangana', 'hyderabad', 'karimnagar', 'khammam', 'mahbubnagar', 'nizamabad', 'sangareddi', 'warangal', 'tripura', 'agartala', 'uttar pradesh', 'agra', 'aligarh', 'amroha', 'ayodhya', 'azamgarh', 'bahraich', 'ballia', 'banda', 'bara banki', 'bareilly', 'basti', 'bijnor', 'bithur', 'budaun', 'bulandshahr', 'deoria', 'etah', 'etawah', 'faizabad', 'farrukhabad-cum-fatehgarh', 'fatehpur', 'fatehpur sikri', 'ghaziabad', 'ghazipur', 'gonda', 'gorakhpur', 'hamirpur', 'hardoi', 'hathras', 'jalaun', 'jaunpur', 'jhansi', 'kannauj', 'kanpur', 'lakhimpur', 'lalitpur', 'lucknow', 'mainpuri', 'mathura', 'meerut', 'mirzapur-vindhyachal', 'moradabad', 'muzaffarnagar', 'partapgarh', 'pilibhit', 'prayagraj', 'rae bareli', 'rampur', 'saharanpur', 'sambhal', 'shahjahanpur', 'sitapur', 'sultanpur', 'tehri', 'varanasi', 'uttarakhand', 'almora', 'dehra dun', 'haridwar', 'mussoorie', 'nainital', 'pithoragarh', 'west bengal', 'alipore', 'alipur duar', 'asansol', 'baharampur', 'bally', 'balurghat', 'bankura', 'baranagar', 'barasat', 'barrackpore', 'basirhat', 'bhatpara', 'bishnupur', 'budge budge', 'burdwan', 'chandernagore', 'darjiling', 'diamond harbour', 'dum dum', 'durgapur', 'halisahar', 'haora', 'hugli', 'ingraj bazar', 'jalpaiguri', 'kalimpong', 'kamarhati', 'kanchrapara', 'kharagpur', 'koch bihar', 'kolkata', 'krishnanagar', 'malda', 'midnapore', 'murshidabad', 'navadwip', 'palashi', 'panihati', 'purulia', 'raiganj', 'santipur', 'shantiniketan', 'shrirampur', 'siliguri', 'siuri', 'tamluk', 'titagarh']
+topics=["current affairs",
+        "tech", "food", "healthcare", "politics", "fiction",
+        "bollywood", "books", "crime", "space", "religion",
+        "geography", "history","general", "economy", "economics",
+        "corona", "education", "movies", "movie", "international",
+        "local", "sports", "music", "gadgets", "electronics", "business",
+        "elections", "weather", "cities", "art", "weddings"]
 bot = telegram.Bot(TOKEN)
 print(bot.get_me())
 bot = telegram.Bot(TOKEN)
@@ -265,8 +292,43 @@ while (True):
         bot.send_message(chat_id, lol)
         continue
 
+    elif "news" in recentmessage.lower():
+        found = False
+        for i in range(31):
+            if topics[i] in recentmessage.lower():
+                topic = topics[i]
+                found = True
+                break
+        if not found:
+            topic="current affairs"
+        newsapi = NewsApiClient(api_key='1cec50aadff94c538a68e0d626bdb1f4')
 
+        all_articles = newsapi.get_everything(topic, sources='the-times-of-india', sort_by='relevancy')
+        results = []
+        for i in range(10):
+            results.append(all_articles['articles'][i]['title'])
 
+        text = f'''Here is your news:
+        1. {results[0]}
+        2. {results[1]}
+        3. {results[2]}
+        4. {results[3]}
+        5. {results[4]}
+        6. {results[5]}
+        7. {results[6]}
+        8. {results[7]}
+        9. {results[8]}
+        10. {results[9]}'''
+        language = 'en'
+        myobj = gTTS(text=text, lang=language, slow=False)
+        myobj.save("welcome.mp3")
+        bot.send_message(chat_id, text)
+        bot.send_audio(chat_id=chat_id, audio=open('welcome.mp3', 'rb'))
+        continue
+    elif "jokes" or "humor" or "humour" in recentmessage.lower():
+        random_joke=random.choice(jokes_list)
+        bot.send_message(chat_id, random_joke)
+        continue
 
     else:
         name = get_key(chat_id)

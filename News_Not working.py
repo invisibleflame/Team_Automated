@@ -4,7 +4,7 @@ from gtts import gTTS
 
 newsapi = NewsApiClient(api_key='1cec50aadff94c538a68e0d626bdb1f4')
 
-all_articles = newsapi.get_everything(q='politics', sources='the-times-of-india', sort_by='relevancy')
+all_articles = newsapi.get_everything(q='fiction', sources='the-times-of-india', sort_by='relevancy')
 results=[]
 for i in range(10):
     results.append(all_articles['articles'][i]['title'])
