@@ -8,6 +8,7 @@
 ### S.A.S.H.A 
 ### Smart Artificial System for Home Automation
 ### The name aptly describes our smart chatbot and its use in Home Automation. 
+# Name of the Bot on telegram is :- @Team_Automated_Bot
 # Features of the Bot
 ### Password protected
 ### Can change password
