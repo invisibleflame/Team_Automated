@@ -20,6 +20,9 @@
 ### If a device is On and someone inputs to on it, bot replies with message as it's already on and vice-versa
 ### It replies in an informative manner when someone ask it what can it do, etc 
 ### The code for Alexa integration is ready and we are waiting for the hardware to arrive.
+### It can tell us jokes
+### It can tell us current news when typed the section of news required like sports news, etc both in written as well as audio format
+### It can tell weather reports of over 500 cities of India when asked to "Tell weather of Mumbai", etc. 
 # Final Project Expectations
 ### Final project would be a Hardware model which would include some Prototype devices like light, fan,etc. which we can control with the help of our ChatBot via Telegram.
 ### The Work of Alexa Integration would get complete and thus, we can also operate our devices with the help of Alexa.
