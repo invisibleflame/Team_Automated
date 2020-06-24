@@ -53,29 +53,39 @@ import string
 #       return True
 #   return False
 
-def find_substring(ssub_string, sstring):
-    search_start = 0
-    while (search_start < len(sstring)):
-      index = sstring.find(ssub_string, search_start)
-      if index == -1:
-        return False
-      is_prefix_whitespace = (index == 0 or sstring[index - 1] in string.whitespace)
-      search_start = index + len(ssub_string)
-      is_suffix_whitespace = (search_start == len(sstring) or sstring[search_start] in string.whitespace)
-      if (is_prefix_whitespace and is_suffix_whitespace):
-        return True
-    return False
+# def find_substring(ssub_string, sstring):
+#     search_start = 0
+#     while (search_start < len(sstring)):
+#       index = sstring.find(ssub_string, search_start)
+#       if index == -1:
+#         return False
+#       is_prefix_whitespace = (index == 0 or sstring[index - 1] in string.whitespace)
+#       search_start = index + len(ssub_string)
+#       is_suffix_whitespace = (search_start == len(sstring) or sstring[search_start] in string.whitespace)
+#       if (is_prefix_whitespace and is_suffix_whitespace):
+#         return True
+#     return False
+#
+#
+# string1 = "on"
+# string2 = "Fan on"
+# print (find_substring("on", string2.lower()))
+# print (find_substring("a", 'a b'))
+# print (find_substring('b', 'a b'))
+#
+#
+# string1 = "ADVANCE"
+# string2 = "ADVANCED BUSINESS EQUIPMENT LTD"
+# print (find_substring(string1, string2))
+# print (find_substring('a', 'ab'))
+# print (find_substring('b', 'ab'))
 
+dict={"lol": [23,342,234234,324234,23423]}
+print(dict["lol"][2])
 
-string1 = "on"
-string2 = "Fan on"
-print (find_substring("on", string2.lower()))
-print (find_substring("a", 'a b'))
-print (find_substring('b', 'a b'))
-
-
-string1 = "ADVANCE"
-string2 = "ADVANCED BUSINESS EQUIPMENT LTD"
-print (find_substring(string1, string2))
-print (find_substring('a', 'ab'))
-print (find_substring('b', 'ab'))
+if True:
+    print(2323)
+if True:
+    print(32423)
+elif True:
+    print(2342343)

@@ -95,6 +95,7 @@ fhand12 = open('my-data/market_money.yml').readlines()
 fhand13 = open('my-data/psychology.yml').readlines()
 fhand14 = open('my-data/space_and_science.yml').readlines()
 fhand15 = open('my-data/Sport_games.yml').readlines()
+fhand16 = open('my-data/Sport_games.yml').readlines()
 
 trainer.train(fhand1)
 trainer.train(fhand2)
@@ -110,6 +111,8 @@ trainer.train(fhand12)
 trainer.train(fhand13)
 trainer.train(fhand14)
 trainer.train(fhand15)
+trainer.train(fhand16)
+
 trainer.train(omkar1)
 trainer.train(omkar2)
 trainer.train(omkar3)
@@ -219,6 +222,7 @@ prevmessage = 'dds'
 ids = {}
 fan = 10
 lights = 10
+leds=10
 
 
 def save_pass_to_file(pas):
@@ -400,6 +404,34 @@ while (True):
     elif 'bye' in recentmessage.lower():
         ref = "See you again"
         bot.send_message(chat_id, ref)
+    elif 'night mode' in recentmessage.lower():
+        lights=0
+        fan=0
+        leds=0
+        fan_status = aio.feeds('fan-status')
+        aio.send_data(fan_status.key, 'OFF')
+        welcome_feed = aio.feeds('welcome_feed')
+        aio.send_data(welcome_feed.key, 'OFF')
+        led = aio.feeds('led')
+        aio.send_data(led.key, 'OFF')
+        balcony = aio.feeds('balcony')
+        aio.send_data(balcony.key, 'ON')
+        ##When connected to hardware, send gpio outputs
+        bot.send_message(chat_id, "Night mode is activated, Only balcony lights are switched ON!!")
+
+    elif 'power' in recentmessage.lower() or 'energy' in recentmessage.lower():
+        lights = 0
+        fan = 0
+        leds = 1
+        fan_status = aio.feeds('fan-status')
+        aio.send_data(fan_status.key, 'OFF')
+        welcome_feed = aio.feeds('welcome_feed')
+        aio.send_data(welcome_feed.key, 'OFF')
+        led = aio.feeds('led')
+        aio.send_data(led.key, 'ON')
+        bot.send_message(chat_id, "Energy Saving mode Activated! System on minimum power usage, all unecessary devices are turned OFF!")
+
+
 
     elif 'do' in recentmessage.lower():
         if 'what' in recentmessage.lower():
@@ -517,7 +549,8 @@ while (True):
         bot.send_message(chat_id, random_joke)
         continue
 
-    elif find_substring("on", recentmessage.lower()) or find_substring("off", recentmessage.lower()):
+
+    elif find_substring("on", recentmessage.lower()) or find_substring("off", recentmessage.lower()) or 'high' in recentmessage.lower() or 'low' in recentmessage.lower():
         name = get_key(chat_id)
         text = "Hi {}! Your command is loading please wait!".format(name)
         bot.send_message(chat_id, text)
@@ -531,12 +564,12 @@ while (True):
             ref = "Turned on "
             if 'led' in recentmessage.lower():
                 ref = ref + "led" + ", Task Completed!!"
-                if lights == 1:
+                if leds == 1:
                     bot.send_message(chat_id, "Lights are already ON!!")
                 else:
                     # GPIO.output(led, 1)
                     bot.send_message(chat_id, ref)
-                    lights = 1
+                    leds = 1
                     led = aio.feeds('led')
                     aio.send_data(led.key, 'ON')
                 continue
@@ -571,14 +604,14 @@ while (True):
             ref = "Turned off "
             if 'led' in recentmessage.lower():
                 ref = ref + "led" + ", Task Completed!!"
-                if lights == 0:
+                if leds == 0:
                     bot.send_message(chat_id, "Lights are already OFF!!")
                 else:
                     # GPIO.output(led, 1)
                     bot.send_message(chat_id, ref)
                     led = aio.feeds('led')
                     aio.send_data(led.key, 'OFF')
-                    lights = 0
+                    leds = 0
                 continue
 
             if 'fan' in recentmessage.lower():
@@ -605,9 +638,30 @@ while (True):
                     welcome_feed = aio.feeds('welcome-feed')
                     aio.send_data(welcome_feed.key, 'OFF')
                 continue
+
+            if 'all' in recentmessage.lower():
+                lights=0
+                fan=0
+                leds=0
+                fan_status = aio.feeds('fan-status')
+                aio.send_data(fan_status.key, 'OFF')
+                welcome_feed = aio.feeds('welcome_feed')
+                aio.send_data(welcome_feed.key, 'OFF')
+                led = aio.feeds('led')
+                aio.send_data(led.key, 'OFF')
+                balcony = aio.feeds('balcony')
+                aio.send_data(balcony.key, 'OFF')
+                bot.send_message(chat_id, "All devices turned OFF!")
+
             else:
                 bot.send_message(chat_id, "Invalid command, please try again and specify the appliance properly!")
 
+        if 'high' in recentmessage.lower():
+            if 'fan' in recentmessage.lower():
+                bot.send_message(chat_id, "Fan speed increased!")
+        if 'low' in recentmessage.lower():
+            if 'fan' in recentmessage.lower():
+                bot.send_message(chat_id, "Fan speed ")
 
     else:
 
