@@ -80,12 +80,27 @@ import string
 # print (find_substring('a', 'ab'))
 # print (find_substring('b', 'ab'))
 
-dict={"lol": [23,342,234234,324234,23423]}
-print(dict["lol"][2])
 
-if True:
-    print(2323)
-if True:
-    print(32423)
-elif True:
-    print(2342343)
+home1={"room1": [2,1,1,1], "room2": [1,1,1,0], "room3":[1,1,1,1]}
+for key in home1:
+
+    for i in range(1,home1[key][0] + 1):
+        exec(f'{key}_light_{i} = 10')
+
+    for o in range(home1[key][1]):
+        exec(f'{key}_fan_{o} = 10')
+    for p in range(home1[key][2]):
+        exec (f'{key}_AC_{p} = 10')
+    for u in range(home1[key][3]):
+        exec (f'{key}_TV_{u} = 10')
+
+try:
+    print(room1_light_1)
+    if room1_light_1 or room2_light_5 or room1_light_2 :
+        print("lol1")
+    if room1_fan_0:
+        print("lol2")
+    print(room1_light_2)
+
+
+except: print("lol")
