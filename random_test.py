@@ -93,8 +93,10 @@ for key in home1:
         exec (f'{key}_AC_{p} = 10')
     for u in range(home1[key][3]):
         exec (f'{key}_TV_{u} = 10')
-
+room1_light_1=0
 try:
+    if room1_light_1:
+        print(23423534657566765867)
     print(room1_light_1)
     if room1_light_1 or room2_light_5 or room1_light_2 :
         print("lol1")

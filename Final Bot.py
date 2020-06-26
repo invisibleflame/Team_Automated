@@ -1,5 +1,5 @@
-# TOKEN = '1123378208:AAFnDmS4CA5aRsJYHYfvm8e-s_E6YIRYxxo'
-TOKEN = '1237103929:AAH-UDwFKEuS_NlZGJifnv2tavcTXsF0gg4'
+TOKEN = '1123378208:AAFnDmS4CA5aRsJYHYfvm8e-s_E6YIRYxxo'
+#TOKEN = '1237103929:AAH-UDwFKEuS_NlZGJifnv2tavcTXsF0gg4'
 import telegram
 import time
 import random
@@ -227,14 +227,14 @@ home1={"room1": [2,1,1,1], "room2": [1,1,1,0], "room3":[1,1,1,1]}
 for key in home1:
 
     for i in range(1,home1[key][0] +1):
-        exec(f'{key}_light_{i} = 10')
+        exec(f'{key}_light_{i} = 0')
 
     for o in range(1,home1[key][1]+1):
-        exec(f'{key}_fan_{o} = 10')
+        exec(f'{key}_fan_{o} = 0')
     for p in range(1,home1[key][2]+1):
-        exec (f'{key}_AC_{p} = 10')
+        exec (f'{key}_AC_{p} = 0')
     for u in range(1,home1[key][3]+1):
-        exec (f'{key}_TV_{u} = 10')
+        exec (f'{key}_TV_{u} = 0')
 
 def save_pass_to_file(pas):
     f = open('r.txt', 'w')
@@ -821,18 +821,26 @@ while (True):
 
         if 'on' in recentmessage.lower():
             if "room1" in recentmessage.lower():
+                print(23)
                 if "light1" in recentmessage.lower():
+                    print(43)
                     try:
+                        print(45)
                         if room1_light_1:
+                            print(56)
                             if room1_light_1==0:
+                                print(345)
                                 room1_light_1=1
                                 room1_light_1_status = aio.feeds('room1_light_1_status')
                                 aio.send_data(room1_light_1_status.key, 'ON')
                                 bot.send_message(chat_id, "Room1 light1 switched ON!")
                             else:
+                                print(2431)
                                 bot.send_message(chat_id, "Room1 Light1 is already ON")
                     except:
+                        print(12312)
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    print(12312476879)
                     continue
 
 
