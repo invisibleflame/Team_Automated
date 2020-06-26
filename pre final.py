@@ -16,6 +16,8 @@ import smtplib
 from email.message import EmailMessage
 import requests
 from gtts import gTTS
+from newsapi import NewsApiClient
+
 from Adafruit_IO import RequestError, client, Feed
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
@@ -127,7 +129,6 @@ ADAFRUIT_IO_USERNAME = 'omkarghugarkar7'
 ADAFRUIT_IO_KEY = 'aio_VWgw43BpdrvxR4caIaiFhByDpk0E'
 
 aio = client.Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
-
 jokes_list = ["Q: What’s the difference between England and a tea bag? "
               "A: The tea bag stays in the cup longer.",
               "A dyslexic man walks into a bra.",
@@ -836,6 +837,7 @@ while (True):
                                 bot.send_message(chat_id, "Room1 Light1 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 if "light2" in recentmessage.lower():
@@ -850,6 +852,7 @@ while (True):
                                 bot.send_message(chat_id, "Room1 Light2 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 if "light3" in recentmessage.lower():
@@ -864,6 +867,7 @@ while (True):
                                 bot.send_message(chat_id, "Room1 Light3 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "lights" in recentmessage.lower():
                     bot.send_message(chat_id, "All lights in room1 turned on")
@@ -888,6 +892,7 @@ while (True):
 
 
                     except: print("")
+                    continue
 
 
                 if "fan1" in recentmessage.lower() or "fan" in recentmessage.lower():
@@ -902,6 +907,7 @@ while (True):
                                 bot.send_message(chat_id, "Room1 fan is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 if "tv" in recentmessage.lower():
@@ -916,6 +922,7 @@ while (True):
                                 bot.send_message(chat_id, "Room1 TV is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 if "ac" in recentmessage.lower():
@@ -930,6 +937,7 @@ while (True):
                                 bot.send_message(chat_id, "Room1 AC is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 else:
@@ -986,6 +994,7 @@ while (True):
                     except:
                         print("")
                     bot.send_message(chat_id, "All devices in room 3 are now turned ON!!")
+                    continue
 
             if "room2" in recentmessage.lower():
                 if "light1" in recentmessage.lower():
@@ -1000,6 +1009,7 @@ while (True):
                                 bot.send_message(chat_id, "Room2 Light1 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light2" in recentmessage.lower():
                     try:
@@ -1013,6 +1023,7 @@ while (True):
                                 bot.send_message(chat_id, "Room2 Light2 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light3" in recentmessage.lower():
                     try:
@@ -1026,6 +1037,7 @@ while (True):
                                 bot.send_message(chat_id, "Room2 Light3 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "lights" in recentmessage.lower():
                     bot.send_message(chat_id, "All lights in room1 turned on")
@@ -1051,6 +1063,7 @@ while (True):
 
                     except:
                         print("")
+                    continue
 
                 if "fan1" in recentmessage.lower() or "fan" in recentmessage.lower():
                     try:
@@ -1064,6 +1077,7 @@ while (True):
                                 bot.send_message(chat_id, "Room2 fan is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "tv" in recentmessage.lower():
                     try:
@@ -1077,6 +1091,7 @@ while (True):
                                 bot.send_message(chat_id, "Room2 TV is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "ac" in recentmessage.lower():
                     try:
@@ -1090,6 +1105,7 @@ while (True):
                                 bot.send_message(chat_id, "Room2 AC is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 else:
@@ -1147,6 +1163,7 @@ while (True):
                         print("")
 
                     bot.send_message(chat_id, "All devices in room 2 are now turned ON!!")
+                    continue
 
             if "room3" in recentmessage.lower():
                 if "light1" in recentmessage.lower():
@@ -1161,6 +1178,7 @@ while (True):
                                 bot.send_message(chat_id, "Room3 Light1 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light2" in recentmessage.lower():
                     try:
@@ -1174,6 +1192,7 @@ while (True):
                                 bot.send_message(chat_id, "Room3 Light2 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light3" in recentmessage.lower():
                     try:
@@ -1187,6 +1206,7 @@ while (True):
                                 bot.send_message(chat_id, "Room3 Light3 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "lights" in recentmessage.lower():
                     bot.send_message(chat_id, "All lights in room1 turned on")
@@ -1212,6 +1232,7 @@ while (True):
 
                     except:
                         print("")
+                    continue
 
                 if "fan1" in recentmessage.lower() or "fan" in recentmessage.lower():
                     try:
@@ -1225,6 +1246,7 @@ while (True):
                                 bot.send_message(chat_id, "Room3 fan is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "tv" in recentmessage.lower():
                     try:
@@ -1238,6 +1260,7 @@ while (True):
                                 bot.send_message(chat_id, "Room3 TV is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "ac" in recentmessage.lower():
                     try:
@@ -1251,6 +1274,7 @@ while (True):
                                 bot.send_message(chat_id, "Room3 AC is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 else:
@@ -1307,6 +1331,7 @@ while (True):
                     except:
                         print("")
                     bot.send_message(chat_id, "All devices in room 3 are now turned ON!!")
+                    continue
 
 
 
@@ -1471,9 +1496,14 @@ while (True):
                 except:
                     print("")
                 bot.send_message(chat_id, "All devices are now turned ON!!")
+                continue
 
 
-            else: bot.send_message(chat_id, "INVALID COMMAND, PLEASE TRY AGAIN!!")
+            else:
+                bot.send_message(chat_id, "INVALID COMMAND, PLEASE TRY AGAIN!!")
+                continue
+
+
         if 'off' in recentmessage.lower():
             if "room1" in recentmessage.lower():
                 if "light1" in recentmessage.lower():
@@ -1488,6 +1518,7 @@ while (True):
                                 bot.send_message(chat_id, "Room1 Light1 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light2" in recentmessage.lower():
                     try:
@@ -1501,6 +1532,7 @@ while (True):
                                 bot.send_message(chat_id, "Room1 Light2 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light3" in recentmessage.lower():
                     try:
@@ -1514,6 +1546,7 @@ while (True):
                                 bot.send_message(chat_id, "Room1 Light3 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "lights" in recentmessage.lower():
                     bot.send_message(chat_id, "All lights in room1 turned OFF")
@@ -1539,7 +1572,7 @@ while (True):
 
                     except:
                         print("")
-
+                    continue
                 if "fan1" in recentmessage.lower() or "fan" in recentmessage.lower():
                     try:
                         if room1_fan_1:
@@ -1552,6 +1585,7 @@ while (True):
                                 bot.send_message(chat_id, "Room1 fan is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "tv" in recentmessage.lower():
                     try:
@@ -1565,6 +1599,7 @@ while (True):
                                 bot.send_message(chat_id, "Room1 TV is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "ac" in recentmessage.lower():
                     try:
@@ -1578,6 +1613,7 @@ while (True):
                                 bot.send_message(chat_id, "Room1 AC is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 else:
@@ -1634,6 +1670,7 @@ while (True):
                     except:
                         print("")
                     bot.send_message(chat_id, "All devices in room 3 are now turned OFF!!")
+                    continue
 
             if "room2" in recentmessage.lower():
                 if "light1" in recentmessage.lower():
@@ -1648,6 +1685,7 @@ while (True):
                                 bot.send_message(chat_id, "Room2 Light1 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light2" in recentmessage.lower():
                     try:
@@ -1661,6 +1699,7 @@ while (True):
                                 bot.send_message(chat_id, "Room2 Light2 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light3" in recentmessage.lower():
                     try:
@@ -1674,6 +1713,7 @@ while (True):
                                 bot.send_message(chat_id, "Room2 Light3 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "lights" in recentmessage.lower():
                     bot.send_message(chat_id, "All lights in room1 turned OFF")
@@ -1699,6 +1739,7 @@ while (True):
 
                     except:
                         print("")
+                    continue
 
                 if "fan1" in recentmessage.lower() or "fan" in recentmessage.lower():
                     try:
@@ -1712,6 +1753,7 @@ while (True):
                                 bot.send_message(chat_id, "Room2 fan is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "tv" in recentmessage.lower():
                     try:
@@ -1725,6 +1767,7 @@ while (True):
                                 bot.send_message(chat_id, "Room2 TV is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "ac" in recentmessage.lower():
                     try:
@@ -1738,6 +1781,7 @@ while (True):
                                 bot.send_message(chat_id, "Room2 AC is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 else:
@@ -1795,6 +1839,7 @@ while (True):
                         print("")
 
                     bot.send_message(chat_id, "All devices in room 2 are now turned OFF!!")
+                    continue
 
             if "room3" in recentmessage.lower():
                 if "light1" in recentmessage.lower():
@@ -1809,6 +1854,7 @@ while (True):
                                 bot.send_message(chat_id, "Room3 Light1 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light2" in recentmessage.lower():
                     try:
@@ -1822,6 +1868,7 @@ while (True):
                                 bot.send_message(chat_id, "Room3 Light2 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light3" in recentmessage.lower():
                     try:
@@ -1835,6 +1882,7 @@ while (True):
                                 bot.send_message(chat_id, "Room3 Light3 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "lights" in recentmessage.lower():
                     bot.send_message(chat_id, "All lights in room1 turned OFF")
@@ -1860,7 +1908,7 @@ while (True):
 
                     except:
                         print("")
-
+                    continue
                 if "fan1" in recentmessage.lower() or "fan" in recentmessage.lower():
                     try:
                         if room3_fan_1:
@@ -1873,6 +1921,7 @@ while (True):
                                 bot.send_message(chat_id, "Room3 fan is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "tv" in recentmessage.lower():
                     try:
@@ -1886,6 +1935,7 @@ while (True):
                                 bot.send_message(chat_id, "Room3 TV is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "ac" in recentmessage.lower():
                     try:
@@ -1899,6 +1949,7 @@ while (True):
                                 bot.send_message(chat_id, "Room3 AC is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 else:
@@ -1955,6 +2006,7 @@ while (True):
                     except:
                         print("")
                     bot.send_message(chat_id, "All devices in room 3 are now turned OFF!!")
+                    continue
 
             if "all" in recentmessage.lower():
                 try:
@@ -2116,8 +2168,10 @@ while (True):
                 except:
                     print("")
                 bot.send_message(chat_id, "All devices are now turned OFF!!")
+                continue
             else:
                 bot.send_message(chat_id, "INVALID COMMAND, PLEASE TRY AGAIN!!")
+                continue
 
 
 
@@ -2127,21 +2181,27 @@ while (True):
                 try:
                     if room1_fan_1:
                         bot.send_message(chat_id, "room1 fan speed increased")
-                except: bot.send_message(chat_id, "There is no fan in room 1!!")
+                except:
+                    bot.send_message(chat_id, "There is no fan in room 1!!")
+                continue
 
 
             if "room2" in recentmessage.lower():
                 try:
                     if room2_fan_1:
                         bot.send_message(chat_id, "room2 fan speed increased")
-                except: bot.send_message(chat_id, "There is no fan in room 2!!")
+                except:
+                    bot.send_message(chat_id, "There is no fan in room 2!!")
+                continue
 
 
             if "room3" in recentmessage.lower():
                 try:
                     if room3_fan_1:
                         bot.send_message(chat_id, "room3 fan speed increased")
-                except: bot.send_message(chat_id, "There is no fan in room 3!!")
+                except:
+                    bot.send_message(chat_id, "There is no fan in room 3!!")
+                continue
 
 
         if 'low' in recentmessage.lower():
@@ -2152,6 +2212,7 @@ while (True):
                         bot.send_message(chat_id, "room1 fan speed decreased")
                 except:
                     bot.send_message(chat_id, "There is no fan in room 1!!")
+                continue
 
             if "room2" in recentmessage.lower():
                 try:
@@ -2159,6 +2220,7 @@ while (True):
                         bot.send_message(chat_id, "room2 fan speed decreased")
                 except:
                     bot.send_message(chat_id, "There is no fan in room 2!!")
+                continue
 
             if "room3" in recentmessage.lower():
                 try:
@@ -2166,6 +2228,7 @@ while (True):
                         bot.send_message(chat_id, "room3 fan speed decreased")
                 except:
                     bot.send_message(chat_id, "There is no fan in room 3!!")
+                continue
 
 
     else:
