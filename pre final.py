@@ -126,7 +126,7 @@ trainer.train(omkar3)
 trainer.train(omkar4)
 
 ADAFRUIT_IO_USERNAME = 'omkarghugarkar7'
-ADAFRUIT_IO_KEY = 'aio_VWgw43BpdrvxR4caIaiFhByDpk0E'
+ADAFRUIT_IO_KEY = 'aio_IOGN82wAAjJ33N8AlVs7hp1z6wmN'
 
 aio = client.Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
 jokes_list = ["Q: What’s the difference between England and a tea bag? "
@@ -230,14 +230,14 @@ leds=10
 home1={"room1": [1,0,1,1], "room2": [1,1,0,1], "room3":[1,0,1,1]}
 for key in home1:
 
-    for i in range(1,home1[key][0] +1):
+    for i in range(1,home1[key][0] + 1):
         exec(f'{key}_light_{i} = 2')
 
-    for o in range(1,home1[key][1]+1):
+    for o in range(1,home1[key][1] + 1):
         exec(f'{key}_fan_{o} = 2')
-    for p in range(1,home1[key][2]+1):
+    for p in range(1,home1[key][2] + 1):
         exec (f'{key}_AC_{p} = 2')
-    for u in range(1,home1[key][3]+1):
+    for u in range(1,home1[key][3] + 1):
         exec (f'{key}_TV_{u} = 2')
 
 def save_pass_to_file(pas):
