@@ -11,7 +11,7 @@
 # Name of the Bot on telegram is :- @Team_Automated_Bot
 # Features of the Bot
 ### Password protected
-### Can change password
+### It can change password 
 ### Informs the owners of chatbot for password change through E-Mail
 ### Asks the user for name and assigns the chat a particular name and creates a DataBase for the Same
 ### Can detect various commands like hi,hello etc and reply accordingly
