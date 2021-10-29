@@ -1,6 +1,7 @@
 # TOKEN = '1123378208:AAFnDmS4CA5aRsJYHYfvm8e-s_E6YIRYxxo'
 TOKEN = '1237103929:AAH-UDwFKEuS_NlZGJifnv2tavcTXsF0gg4'
 import telegram
+import numpy as np
 import time
 # import RPi.GPIO as GPIO
 import csv
