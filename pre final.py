@@ -4,8 +4,8 @@
 #!pip install chatterbot
 #!pip install chatterbot_corpus
 #!pip install string
-# TOKEN = '1123378208:AAFnDmS4CA5aRsJYHYfvm8e-s_E6YIRYxxo'
-TOKEN = '1237103929:AAH-UDwFKEuS_NlZGJifnv2tavcTXsF0gg4'
+TOKEN = '1123378208:AAFnDmS4CA5aRsJYHYfvm8e-s_E6YIRYxxo'
+#TOKEN = '1237103929:AAH-UDwFKEuS_NlZGJifnv2tavcTXsF0gg4'
 import telegram
 import time
 import random
@@ -16,6 +16,8 @@ import smtplib
 from email.message import EmailMessage
 import requests
 from gtts import gTTS
+from newsapi import NewsApiClient
+
 from Adafruit_IO import RequestError, client, Feed
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
@@ -88,17 +90,17 @@ omkar4 = ["Hi there",
 
 #fhand1 = open('conversation.yml').readlines()
 #fhand2 = open('conversation.yml').readlines()
-fhand3 = open('Artificial_intelligence.yml').readlines()
-fhand4 = open('conversation.yml').readlines()
-fhand5 = open('emotion.yml').readlines()
-fhand6 = open('film.yml').readlines()
-fhand7 = open('food.yml').readlines()
-fhand9 = open('GK.yml').readlines()
-fhand10 = open('IT.yml').readlines()
-fhand11 = open('jokes_fun.yml').readlines()
-fhand12 = open('market_money.yml').readlines()
-fhand13 = open('psychology.yml').readlines()
-fhand14 = open('space_and_science.yml').readlines()
+fhand3 = open('my-data/Artificial_intelligence.yml').readlines()
+fhand4 = open('my-data/conversation.yml').readlines()
+fhand5 = open('my-data/emotion.yml').readlines()
+fhand6 = open('my-data/film.yml').readlines()
+fhand7 = open('my-data/food.yml').readlines()
+fhand9 = open('my-data/GK.yml').readlines()
+fhand10 = open('my-data/IT.yml').readlines()
+fhand11 = open('my-data/jokes_fun.yml').readlines()
+fhand12 = open('my-data/market_money.yml').readlines()
+fhand13 = open('my-data/psychology.yml').readlines()
+fhand14 = open('my-data/space_and_science.yml').readlines()
 #fhand15 = open('Sport_games.yml').readlines()
 #fhand16 = open('Sport_games.yml').readlines()
 
@@ -123,11 +125,10 @@ trainer.train(omkar2)
 trainer.train(omkar3)
 trainer.train(omkar4)
 
-ADAFRUIT_IO_USERNAME = 'omkarghugarkar7'
-ADAFRUIT_IO_KEY = 'aio_VWgw43BpdrvxR4caIaiFhByDpk0E'
+ADAFRUIT_IO_USERNAME = ''
+ADAFRUIT_IO_KEY = ''
 
 aio = client.Client(ADAFRUIT_IO_USERNAME, ADAFRUIT_IO_KEY)
-
 jokes_list = ["Q: What’s the difference between England and a tea bag? "
               "A: The tea bag stays in the cup longer.",
               "A dyslexic man walks into a bra.",
@@ -229,15 +230,15 @@ leds=10
 home1={"room1": [1,0,1,1], "room2": [1,1,0,1], "room3":[1,0,1,1]}
 for key in home1:
 
-    for i in range(1,home1[key][0] +1):
-        exec(f'{key}_light_{i} = 10')
+    for i in range(1,home1[key][0] + 1):
+        exec(f'{key}_light_{i} = 2')
 
-    for o in range(1,home1[key][1]+1):
-        exec(f'{key}_fan_{o} = 10')
-    for p in range(1,home1[key][2]+1):
-        exec (f'{key}_AC_{p} = 10')
-    for u in range(1,home1[key][3]+1):
-        exec (f'{key}_TV_{u} = 10')
+    for o in range(1,home1[key][1] + 1):
+        exec(f'{key}_fan_{o} = 2')
+    for p in range(1,home1[key][2] + 1):
+        exec (f'{key}_AC_{p} = 2')
+    for u in range(1,home1[key][3] + 1):
+        exec (f'{key}_TV_{u} = 2')
 
 def save_pass_to_file(pas):
     f = open('r.txt', 'w')
@@ -421,69 +422,69 @@ while (True):
     elif 'night mode' in recentmessage.lower():
         try:
             if room1_light_1:
-                room1_light_1=0
+                room1_light_1=2
                 room1_light_1_status = aio.feeds('room1-light-1-status')
                 aio.send_data(room1_light_1_status.key, 'OFF')
 
             if room1_light_2:
-                room1_light_2 = 0
+                room1_light_2 = 2
                 room1_light_2_status = aio.feeds('room1-light-2-status')
                 aio.send_data(room1_light_2_status.key, 'OFF')
             if room1_light_3:
-                room1_light_3 = 0
+                room1_light_3 = 2
                 room1_light_3_status = aio.feeds('room1-light-3-status')
                 aio.send_data(room1_light_3_status.key, 'OFF')
         except: print("laila teri lelegi tu likhke lele")
 
         try:
             if room2_light_1:
-                room2_light_1=0
+                room2_light_1=2
                 room2_light_1_status = aio.feeds('room2-light-1-status')
                 aio.send_data(room2_light_1_status.key, 'OFF')
 
             if room2_light_2:
-                room2_light_2 = 0
+                room2_light_2 = 2
                 room2_light_2_status = aio.feeds('room2_light_2_status')
                 aio.send_data(room2_light_2_status.key, 'OFF')
             if room2_light_3:
-                room2_light_3 = 0
+                room2_light_3 = 2
                 room2_light_3_status = aio.feeds('room2_light_3_status')
                 aio.send_data(room2_light_3_status.key, 'OFF')
         except: print("laila teri lelegi tu likhke lele")
 
         try:
             if room3_light_1:
-                room3_light_1=0
+                room3_light_1=2
                 room3_light_1_status = aio.feeds('room3-light-1-status')
                 aio.send_data(room3_light_1_status.key, 'OFF')
 
             if room3_light_2:
-                room3_light_2 = 0
+                room3_light_2 = 2
                 room3_light_2_status = aio.feeds('room3_light_2_status')
                 aio.send_data(room3_light_2_status.key, 'OFF')
             if room3_light_3:
-                room3_light_3 = 0
+                room3_light_3 = 2
                 room3_light_3_status = aio.feeds('room3_light_3_status')
                 aio.send_data(room3_light_3_status.key, 'OFF')
         except: print("laila teri lelegi tu likhke lele")
 
         try:
             if room1_TV_1:
-                room1_TV_1=0
+                room1_TV_1=2
                 room1_TV_1_status = aio.feeds('room1-tv-1-status')
                 aio.send_data(room1_TV_1_status.key, 'OFF')
         except: print("laila teri lelegi tu likhke lele")
 
         try:
             if room2_TV_1:
-                room2_TV_1=0
+                room2_TV_1=2
                 room2_TV_1_status = aio.feeds('room2-tv-1-status')
                 aio.send_data(room2_TV_1_status.key, 'OFF')
         except: print("laila teri lelegi tu likhke lele")
 
         try:
             if room3_TV_1:
-                room3_TV_1=0
+                room3_TV_1=2
                 room3_TV_1_status = aio.feeds('room3-tv-1-status')
                 aio.send_data(room3_TV_1_status.key, 'OFF')
         except: print("laila teri lelegi tu likhke lele")
@@ -552,46 +553,55 @@ while (True):
 
     elif 'power' in recentmessage.lower() or 'energy' in recentmessage.lower() or 'green' in recentmessage.lower():
         try:
+            print(7897)
             if room1_light_1:
+                print(7895897)
                 if room1_light_1==1:
                     try:
+                        print(897)
                         if room1_light_2:
-                            room1_light_2=0
+                            room1_light_2=2
                             room1_light_2_status = aio.feeds('room1_light_2_status')
                             aio.send_data(room1_light_2_status.key, 'OFF')
                         if room1_light_3:
-                            room1_light_3 = 0
+                            room1_light_3 = 2
                             room1_light_3_status = aio.feeds('room1_light_3_status')
                             aio.send_data(room1_light_3_status.key, 'OFF')
                     except: print("kat gaya")
-                if room1_light_2:
-                    if room1_light_2==1:
-                        room1_light_1=0
-                        room1_light_1_status = aio.feeds('room1_light_1_status')
-                        aio.send_data(room1_light_1_status.key, 'OFF')
-                        try:
-                            if room1_light_3:
-                                room1_light_3 = 0
-                                room1_light_3_status = aio.feeds('room1_light_3_status')
-                                aio.send_data(room1_light_3_status.key, 'OFF')
-                        except: print("kat gaya --v2")
-                    if room1_light_3:
-                        if room1_light_3 == 1:
-                            room1_light_1 = 0
-                            room1_light_2 = 0
-                            room1_light_2_status = aio.feeds('room1_light_2_status')
-                            aio.send_data(room1_light_3_status.key, 'OFF')
-                            room1_light_1_status = aio.feeds('room1_light_1_status')
+                print(46)
+
+                try:
+                    if room1_light_2:
+                        if room1_light_2==1:
+                            room1_light_1=2
+                            room1_light_1_status = aio.feeds('room1-light-1-status')
                             aio.send_data(room1_light_1_status.key, 'OFF')
+                            try:
+                                if room1_light_3:
+                                    room1_light_3 = 2
+                                    room1_light_3_status = aio.feeds('room1_light_3_status')
+                                    aio.send_data(room1_light_3_status.key, 'OFF')
+                            except: print("kat gaya --v2")
+                        if room1_light_3:
+                            if room1_light_3 == 1:
+                                room1_light_1 = 2
+                                room1_light_2 = 2
+                                room1_light_2_status = aio.feeds('room1_light_2_status')
+                                aio.send_data(room1_light_3_status.key, 'OFF')
+                                room1_light_1_status = aio.feeds('room1-light-1-status')
+                                aio.send_data(room1_light_1_status.key, 'OFF')
+                except:
+                    pass
+
             try:
                 if room1_AC_1:
-                    room1_AC_1=0
+                    room1_AC_1=2
                     room1_AC_1_status = aio.feeds('room1-ac-1-status')
                     aio.send_data(room1_AC_1_status.key, 'OFF')
             except: print("kat gaya 1.0")
             try:
                 if room1_TV_1:
-                    room1_TV_1=0
+                    room1_TV_1=2
                     room1_TV_1_status = aio.feeds('room1-tv-1-status')
                     aio.send_data(room1_TV_1_status.key, 'OFF')
             except: print("kat gaya 1.0")
@@ -603,42 +613,46 @@ while (True):
                 if room2_light_1==1:
                     try:
                         if room2_light_2:
-                            room2_light_2=0
+                            room2_light_2=2
                             room2_light_2_status = aio.feeds('room2_light_2_status')
                             aio.send_data(room2_light_2_status.key, 'OFF')
                         if room2_light_3:
-                            room2_light_3 = 0
+                            room2_light_3 = 2
                             room2_light_3_status = aio.feeds('room2_light_3_status')
                             aio.send_data(room2_light_3_status.key, 'OFF')
                     except: print("kat gaya")
-                if room2_light_2:
-                    if room2_light_2==1:
-                        room2_light_1=0
-                        room2_light_1_status = aio.feeds('room2-light-1-status')
-                        aio.send_data(room2_light_1_status.key, 'OFF')
-                        try:
-                            if room2_light_3:
-                                room2_light_3 = 0
-                                room2_light_3_status = aio.feeds('room2_light_3_status')
-                                aio.send_data(room2_light_3_status.key, 'OFF')
-                        except: print("kat gaya --v2")
-                    if room2_light_3:
-                        if room2_light_3 == 1:
-                            room2_light_1 = 0
-                            room2_light_2 = 0
-                            room2_light_2_status = aio.feeds('room2_light_2_status')
-                            aio.send_data(room2_light_3_status.key, 'OFF')
+
+                try:
+                    if room2_light_2:
+                        if room2_light_2==1:
+                            room2_light_1=2
                             room2_light_1_status = aio.feeds('room2-light-1-status')
                             aio.send_data(room2_light_1_status.key, 'OFF')
+                            try:
+                                if room2_light_3:
+                                    room2_light_3 = 2
+                                    room2_light_3_status = aio.feeds('room2_light_3_status')
+                                    aio.send_data(room2_light_3_status.key, 'OFF')
+                            except: print("kat gaya --v2")
+                        if room2_light_3:
+                            if room2_light_3 == 1:
+                                room2_light_1 = 2
+                                room2_light_2 = 2
+                                room2_light_2_status = aio.feeds('room2_light_2_status')
+                                aio.send_data(room2_light_3_status.key, 'OFF')
+                                room2_light_1_status = aio.feeds('room2-light-1-status')
+                                aio.send_data(room2_light_1_status.key, 'OFF')
+                except:
+                    pass
             try:
                 if room2_AC_1:
-                    room2_AC_1=0
+                    room2_AC_1=2
                     room2_AC_1_status = aio.feeds('room2-ac-1-status')
                     aio.send_data(room2_AC_1_status.key, 'OFF')
             except: print("kat gaya 1.0")
             try:
                 if room2_TV_1:
-                    room2_TV_1=0
+                    room2_TV_1=2
                     room2_TV_1_status = aio.feeds('room2-tv-1-status')
                     aio.send_data(room2_TV_1_status.key, 'OFF')
             except: print("kat gaya 1.0")
@@ -650,42 +664,46 @@ while (True):
                 if room3_light_1==1:
                     try:
                         if room3_light_2:
-                            room3_light_2=0
+                            room3_light_2=2
                             room3_light_2_status = aio.feeds('room3-light-2-status')
                             aio.send_data(room3_light_2_status.key, 'OFF')
                         if room3_light_3:
-                            room3_light_3 = 0
+                            room3_light_3 = 2
                             room3_light_3_status = aio.feeds('room3_light_3_status')
                             aio.send_data(room3_light_3_status.key, 'OFF')
                     except: print("kat gaya")
-                if room3_light_2:
-                    if room3_light_2==1:
-                        room3_light_1=0
-                        room3_light_1_status = aio.feeds('room3-light-1-status')
-                        aio.send_data(room3_light_1_status.key, 'OFF')
-                        try:
-                            if room3_light_3:
-                                room3_light_3 = 0
-                                room3_light_3_status = aio.feeds('room3_light_3_status')
-                                aio.send_data(room3_light_3_status.key, 'OFF')
-                        except: print("kat gaya --v2")
-                    if room3_light_3:
-                        if room3_light_3 == 1:
-                            room3_light_1 = 0
-                            room3_light_2 = 0
-                            room3_light_2_status = aio.feeds('room3_light_2_status')
-                            aio.send_data(room3_light_3_status.key, 'OFF')
+                try:
+                    if room3_light_2:
+                        if room3_light_2==1:
+                            room3_light_1=2
                             room3_light_1_status = aio.feeds('room3-light-1-status')
                             aio.send_data(room3_light_1_status.key, 'OFF')
+                            try:
+                                if room3_light_3:
+                                    room3_light_3 = 2
+                                    room3_light_3_status = aio.feeds('room3_light_3_status')
+                                    aio.send_data(room3_light_3_status.key, 'OFF')
+                            except: print("kat gaya --v2")
+                        if room3_light_3:
+                            if room3_light_3 == 1:
+                                room3_light_1 = 2
+                                room3_light_2 = 2
+                                room3_light_2_status = aio.feeds('room3_light_2_status')
+                                aio.send_data(room3_light_3_status.key, 'OFF')
+                                room3_light_1_status = aio.feeds('room3-light-1-status')
+                                aio.send_data(room3_light_1_status.key, 'OFF')
+                except:
+                    pass
+
             try:
                 if room3_AC_1:
-                    room3_AC_1=0
+                    room3_AC_1=2
                     room3_AC_1_status = aio.feeds('room3-ac-1-status')
                     aio.send_data(room3_AC_1_status.key, 'OFF')
             except: print("kat gaya 1.0")
             try:
                 if room3_TV_1:
-                    room3_TV_1=0
+                    room3_TV_1=2
                     room3_TV_1_status = aio.feeds('room3-tv-1-status')
                     aio.send_data(room3_TV_1_status.key, 'OFF')
             except: print("kat gaya 1.0")
@@ -826,8 +844,11 @@ while (True):
             if "room1" in recentmessage.lower():
                 if "light1" in recentmessage.lower():
                     try:
+                        print(3453)
                         if room1_light_1:
-                            if room1_light_1==0:
+                            print(3453465)
+                            if room1_light_1==2:
+                                print(12131)
                                 room1_light_1=1
                                 room1_light_1_status = aio.feeds('room1-light-1-status')
                                 aio.send_data(room1_light_1_status.key, 'ON')
@@ -836,12 +857,13 @@ while (True):
                                 bot.send_message(chat_id, "Room1 Light1 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 if "light2" in recentmessage.lower():
                     try:
                         if room1_light_2:
-                            if room1_light_2==0:
+                            if room1_light_2==2:
                                 room1_light_2=1
                                 room1_light_2_status = aio.feeds('room1-light-2-status')
                                 aio.send_data(room1_light_2_status.key, 'ON')
@@ -850,12 +872,13 @@ while (True):
                                 bot.send_message(chat_id, "Room1 Light2 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 if "light3" in recentmessage.lower():
                     try:
                         if room1_light_3:
-                            if room1_light_3==0:
+                            if room1_light_3==2:
                                 room1_light_3=1
                                 room1_light_3_status = aio.feeds('room1_light_3_status')
                                 aio.send_data(room1_light_3_status.key, 'ON')
@@ -864,36 +887,38 @@ while (True):
                                 bot.send_message(chat_id, "Room1 Light3 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "lights" in recentmessage.lower():
                     bot.send_message(chat_id, "All lights in room1 turned on")
                     try:
                         if room1_light_1:
-                            if room1_light_1==0:
+                            if room1_light_1==2:
                                 room1_light_1=1
                                 room1_light_1_status = aio.feeds('room1-light-1-status')
                                 aio.send_data(room1_light_1_status.key, 'ON')
 
                         if room1_light_2:
-                            if room1_light_2==0:
+                            if room1_light_2==2:
                                 room1_light_2=1
                                 room1_light_2_status = aio.feeds('room1_light_2_status')
                                 aio.send_data(room1_light_2_status.key, 'ON')
 
                         if room1_light_3:
-                            if room1_light_3==0:
+                            if room1_light_3==2:
                                 room1_light_3=1
                                 room1_light_3_status = aio.feeds('room1_light_3_status')
                                 aio.send_data(room1_light_3_status.key, 'ON')
 
 
                     except: print("")
+                    continue
 
 
                 if "fan1" in recentmessage.lower() or "fan" in recentmessage.lower():
                     try:
                         if room1_fan_1:
-                            if room1_fan_1==0:
+                            if room1_fan_1==2:
                                 room1_fan_1=1
                                 room1_fan_1_status = aio.feeds('room1_fan_1_status')
                                 aio.send_data(room1_fan_1_status.key, 'ON')
@@ -902,12 +927,13 @@ while (True):
                                 bot.send_message(chat_id, "Room1 fan is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 if "tv" in recentmessage.lower():
                     try:
                         if room1_TV_1:
-                            if room1_TV_1==0:
+                            if room1_TV_1==2:
                                 room1_TV_1=1
                                 room1_TV_1_status = aio.feeds('room1-tv-1-status')
                                 aio.send_data(room1_TV_1_status.key, 'ON')
@@ -916,12 +942,13 @@ while (True):
                                 bot.send_message(chat_id, "Room1 TV is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 if "ac" in recentmessage.lower():
                     try:
                         if room1_AC_1:
-                            if room1_AC_1==0:
+                            if room1_AC_1==2:
                                 room1_AC_1=1
                                 room1_AC_1_status = aio.feeds('room1-ac-1-status')
                                 aio.send_data(room1_AC_1_status.key, 'ON')
@@ -930,24 +957,25 @@ while (True):
                                 bot.send_message(chat_id, "Room1 AC is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 else:
                     try:
                         if room1_light_1:
-                            if room1_light_1 == 0:
+                            if room1_light_1 == 2:
                                 room1_light_1 = 1
                                 room1_light_1_status = aio.feeds('room1-light-1-status')
                                 aio.send_data(room1_light_1_status.key, 'ON')
 
                         if room1_light_2:
-                            if room1_light_2 == 0:
+                            if room1_light_2 == 2:
                                 room1_light_2 = 1
                                 room1_light_2_status = aio.feeds('room1-light-2-status')
                                 aio.send_data(room1_light_2_status.key, 'ON')
 
                         if room1_light_3:
-                            if room1_light_3 == 0:
+                            if room1_light_3 == 2:
                                 room1_light_3 = 1
                                 room1_light_3_status = aio.feeds('room1_light_3_status')
                                 aio.send_data(room1_light_3_status.key, 'ON')
@@ -958,9 +986,9 @@ while (True):
 
                     try:
                         if room1_TV_1:
-                            if room1_TV_1 == 0:
+                            if room1_TV_1 == 2:
                                 room1_TV_1 = 1
-                                room1_TV_1_status = aio.feeds('room1_TV_1_status')
+                                room1_TV_1_status = aio.feeds('room1-tv-1-status')
                                 aio.send_data(room1_TV_1_status.key, 'ON')
 
                     except:
@@ -968,7 +996,7 @@ while (True):
 
                     try:
                         if room1_AC_1:
-                            if room1_AC_1 == 0:
+                            if room1_AC_1 == 2:
                                 room1_AC_1 = 1
                                 room1_AC_1_status = aio.feeds('room1-ac-1-status')
                                 aio.send_data(room1_AC_1_status.key, 'ON')
@@ -978,7 +1006,7 @@ while (True):
 
                     try:
                         if room1_fan_1:
-                            if room1_fan_1 == 0:
+                            if room1_fan_1 == 2:
                                 room1_fan_1 = 1
                                 room1_fan_1_status = aio.feeds('room1_fan_1_status')
                                 aio.send_data(room1_fan_1_status.key, 'ON')
@@ -986,12 +1014,13 @@ while (True):
                     except:
                         print("")
                     bot.send_message(chat_id, "All devices in room 3 are now turned ON!!")
+                    continue
 
             if "room2" in recentmessage.lower():
                 if "light1" in recentmessage.lower():
                     try:
                         if room2_light_1:
-                            if room2_light_1 == 0:
+                            if room2_light_1 == 2:
                                 room2_light_1 = 1
                                 room2_light_1_status = aio.feeds('room2-light-1-status')
                                 aio.send_data(room2_light_1_status.key, 'ON')
@@ -1000,11 +1029,12 @@ while (True):
                                 bot.send_message(chat_id, "Room2 Light1 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light2" in recentmessage.lower():
                     try:
                         if room2_light_2:
-                            if room2_light_2 == 0:
+                            if room2_light_2 == 2:
                                 room2_light_2 = 1
                                 room2_light_2_status = aio.feeds('room2-light-2-status')
                                 aio.send_data(room2_light_2_status.key, 'ON')
@@ -1013,11 +1043,12 @@ while (True):
                                 bot.send_message(chat_id, "Room2 Light2 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light3" in recentmessage.lower():
                     try:
                         if room2_light_3:
-                            if room2_light_3 == 0:
+                            if room2_light_3 == 2:
                                 room2_light_3 = 1
                                 room2_light_3_status = aio.feeds('room1_light_3_status')
                                 aio.send_data(room2_light_3_status.key, 'ON')
@@ -1026,24 +1057,25 @@ while (True):
                                 bot.send_message(chat_id, "Room2 Light3 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "lights" in recentmessage.lower():
                     bot.send_message(chat_id, "All lights in room1 turned on")
                     try:
                         if room2_light_1:
-                            if room2_light_1 == 0:
+                            if room2_light_1 == 2:
                                 room2_light_1 = 1
                                 room2_light_1_status = aio.feeds('room2-light-1-status')
                                 aio.send_data(room2_light_1_status.key, 'ON')
 
                         if room2_light_2:
-                            if room2_light_2 == 0:
+                            if room2_light_2 == 2:
                                 room2_light_2 = 1
                                 room2_light_2_status = aio.feeds('room2_light_2_status')
                                 aio.send_data(room2_light_2_status.key, 'ON')
 
                         if room2_light_3:
-                            if room2_light_3 == 0:
+                            if room2_light_3 == 2:
                                 room2_light_3 = 1
                                 room2_light_3_status = aio.feeds('room2_light_3_status')
                                 aio.send_data(room2_light_3_status.key, 'ON')
@@ -1051,11 +1083,12 @@ while (True):
 
                     except:
                         print("")
+                    continue
 
                 if "fan1" in recentmessage.lower() or "fan" in recentmessage.lower():
                     try:
                         if room2_fan_1:
-                            if room2_fan_1 == 0:
+                            if room2_fan_1 == 2:
                                 room2_fan_1 = 1
                                 room2_fan_1_status = aio.feeds('room2-fan-1-status')
                                 aio.send_data(room2_fan_1_status.key, 'ON')
@@ -1064,11 +1097,12 @@ while (True):
                                 bot.send_message(chat_id, "Room2 fan is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "tv" in recentmessage.lower():
                     try:
                         if room2_TV_1:
-                            if room2_TV_1 == 0:
+                            if room2_TV_1 == 2:
                                 room2_TV_1 = 1
                                 room2_TV_1_status = aio.feeds('room2-tv-1-status')
                                 aio.send_data(room2_TV_1_status.key, 'ON')
@@ -1077,11 +1111,12 @@ while (True):
                                 bot.send_message(chat_id, "Room2 TV is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "ac" in recentmessage.lower():
                     try:
                         if room2_AC_1:
-                            if room2_AC_1 == 0:
+                            if room2_AC_1 == 2:
                                 room2_AC_1 = 1
                                 room2_AC_1_status = aio.feeds('room2-ac-1-status')
                                 aio.send_data(room2_AC_1_status.key, 'ON')
@@ -1090,24 +1125,25 @@ while (True):
                                 bot.send_message(chat_id, "Room2 AC is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 else:
                     try:
                         if room2_light_1:
-                            if room2_light_1 == 0:
+                            if room2_light_1 == 2:
                                 room2_light_1 = 1
                                 room2_light_1_status = aio.feeds('room2-light-1-status')
                                 aio.send_data(room2_light_1_status.key, 'ON')
 
                         if room2_light_2:
-                            if room2_light_2 == 0:
+                            if room2_light_2 == 2:
                                 room2_light_2 = 1
                                 room2_light_2_status = aio.feeds('room2-light-2-status')
                                 aio.send_data(room2_light_2_status.key, 'ON')
 
                         if room2_light_3:
-                            if room2_light_3 == 0:
+                            if room2_light_3 == 2:
                                 room2_light_3 = 1
                                 room2_light_3_status = aio.feeds('room2_light_3_status')
                                 aio.send_data(room2_light_3_status.key, 'ON')
@@ -1118,7 +1154,7 @@ while (True):
 
                     try:
                         if room2_TV_1:
-                            if room2_TV_1 == 0:
+                            if room2_TV_1 == 2:
                                 room2_TV_1 = 1
                                 room2_TV_1_status = aio.feeds('room2-tv-1-status')
                                 aio.send_data(room2_TV_1_status.key, 'ON')
@@ -1128,7 +1164,7 @@ while (True):
 
                     try:
                         if room2_AC_1:
-                            if room2_AC_1 == 0:
+                            if room2_AC_1 == 2:
                                 room2_AC_1 = 1
                                 room2_AC_1_status = aio.feeds('room2-ac-1-status')
                                 aio.send_data(room2_AC_1_status.key, 'ON')
@@ -1138,7 +1174,7 @@ while (True):
 
                     try:
                         if room2_fan_1:
-                            if room2_fan_1 == 0:
+                            if room2_fan_1 == 2:
                                 room2_fan_1 = 1
                                 room2_fan_1_status = aio.feeds('room2-fan-1-status')
                                 aio.send_data(room2_fan_1_status.key, 'ON')
@@ -1147,12 +1183,13 @@ while (True):
                         print("")
 
                     bot.send_message(chat_id, "All devices in room 2 are now turned ON!!")
+                    continue
 
             if "room3" in recentmessage.lower():
                 if "light1" in recentmessage.lower():
                     try:
                         if room3_light_1:
-                            if room3_light_1 == 0:
+                            if room3_light_1 == 2:
                                 room3_light_1 = 1
                                 room3_light_1_status = aio.feeds('room3-light-1-status')
                                 aio.send_data(room3_light_1_status.key, 'ON')
@@ -1161,11 +1198,12 @@ while (True):
                                 bot.send_message(chat_id, "Room3 Light1 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light2" in recentmessage.lower():
                     try:
                         if room3_light_2:
-                            if room3_light_2 == 0:
+                            if room3_light_2 == 2:
                                 room3_light_2 = 1
                                 room3_light_2_status = aio.feeds('room3_light_2_status')
                                 aio.send_data(room3_light_2_status.key, 'ON')
@@ -1174,11 +1212,12 @@ while (True):
                                 bot.send_message(chat_id, "Room3 Light2 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light3" in recentmessage.lower():
                     try:
                         if room3_light_3:
-                            if room3_light_3 == 0:
+                            if room3_light_3 == 2:
                                 room3_light_3 = 1
                                 room3_light_3_status = aio.feeds('room3_light_3_status')
                                 aio.send_data(room3_light_3_status.key, 'ON')
@@ -1187,24 +1226,25 @@ while (True):
                                 bot.send_message(chat_id, "Room3 Light3 is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "lights" in recentmessage.lower():
                     bot.send_message(chat_id, "All lights in room1 turned on")
                     try:
                         if room3_light_1:
-                            if room3_light_1 == 0:
+                            if room3_light_1 == 2:
                                 room3_light_1 = 1
                                 room3_light_1_status = aio.feeds('room3-light-1-status')
                                 aio.send_data(room3_light_1_status.key, 'ON')
 
                         if room3_light_2:
-                            if room3_light_2 == 0:
+                            if room3_light_2 == 2:
                                 room3_light_2 = 1
                                 room3_light_2_status = aio.feeds('room3_light_2_status')
                                 aio.send_data(room3_light_2_status.key, 'ON')
 
                         if room3_light_3:
-                            if room3_light_3 == 0:
+                            if room3_light_3 == 2:
                                 room3_light_3 = 1
                                 room3_light_3_status = aio.feeds('room3_light_3_status')
                                 aio.send_data(room3_light_3_status.key, 'ON')
@@ -1212,37 +1252,40 @@ while (True):
 
                     except:
                         print("")
+                    continue
 
                 if "fan1" in recentmessage.lower() or "fan" in recentmessage.lower():
                     try:
                         if room3_fan_1:
-                            if room3_fan_1 == 0:
+                            if room3_fan_1 == 2:
                                 room3_fan_1 = 1
-                                room3_fan_1_status = aio.feeds('room3-fan_1_status')
+                                room3_fan_1_status = aio.feeds('room3-fan-1-status')
                                 aio.send_data(room3_fan_1_status.key, 'ON')
                                 bot.send_message(chat_id, "Room3 fan switched ON!")
                             else:
                                 bot.send_message(chat_id, "Room3 fan is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "tv" in recentmessage.lower():
                     try:
                         if room3_TV_1:
-                            if room3_TV_1 == 0:
+                            if room3_TV_1 == 2:
                                 room3_TV_1 = 1
-                                room3_TV_1_status = aio.feeds('room3_TV_1_status')
+                                room3_TV_1_status = aio.feeds('room3-tv-1-status')
                                 aio.send_data(room3_TV_1_status.key, 'ON')
                                 bot.send_message(chat_id, "Room3 TV switched ON!")
                             else:
                                 bot.send_message(chat_id, "Room3 TV is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "ac" in recentmessage.lower():
                     try:
                         if room3_AC_1:
-                            if room3_AC_1 == 0:
+                            if room3_AC_1 == 2:
                                 room3_AC_1 = 1
                                 room3_AC_1_status = aio.feeds('room3-ac-1-status')
                                 aio.send_data(room3_AC_1_status.key, 'ON')
@@ -1251,24 +1294,25 @@ while (True):
                                 bot.send_message(chat_id, "Room3 AC is already ON")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 else:
                     try:
                         if room3_light_1:
-                            if room3_light_1 == 0:
+                            if room3_light_1 == 2:
                                 room3_light_1 = 1
                                 room3_light_1_status = aio.feeds('room3-light-1-status')
                                 aio.send_data(room3_light_1_status.key, 'ON')
 
                         if room3_light_2:
-                            if room3_light_2 == 0:
+                            if room3_light_2 == 2:
                                 room3_light_2 = 1
                                 room3_light_2_status = aio.feeds('room3_light_2_status')
                                 aio.send_data(room3_light_2_status.key, 'ON')
 
                         if room3_light_3:
-                            if room3_light_3 == 0:
+                            if room3_light_3 == 2:
                                 room3_light_3 = 1
                                 room3_light_3_status = aio.feeds('room3_light_3_status')
                                 aio.send_data(room3_light_3_status.key, 'ON')
@@ -1279,7 +1323,7 @@ while (True):
 
                     try:
                         if room3_TV_1:
-                            if room3_TV_1 == 0:
+                            if room3_TV_1 == 2:
                                 room3_TV_1 = 1
                                 room3_TV_1_status = aio.feeds('room3-tv-1-status')
                                 aio.send_data(room3_TV_1_status.key, 'ON')
@@ -1289,9 +1333,9 @@ while (True):
 
                     try:
                         if room3_AC_1:
-                            if room3_AC_1 == 0:
+                            if room3_AC_1 == 2:
                                 room3_AC_1 = 1
-                                room3_AC_1_status = aio.feeds('room3-ac_1_status')
+                                room3_AC_1_status = aio.feeds('room3-ac-1-status')
                                 aio.send_data(room3_AC_1_status.key, 'ON')
 
                     except:
@@ -1299,14 +1343,15 @@ while (True):
 
                     try:
                         if room3_fan_1:
-                            if room3_fan_1 == 0:
+                            if room3_fan_1 == 2:
                                 room3_fan_1 = 1
-                                room3_fan_1_status = aio.feeds('room3_fan_1_status')
+                                room3_fan_1_status = aio.feeds('room3-fan-1-status')
                                 aio.send_data(room3_fan_1_status.key, 'ON')
 
                     except:
                         print("")
                     bot.send_message(chat_id, "All devices in room 3 are now turned ON!!")
+                    continue
 
 
 
@@ -1314,19 +1359,19 @@ while (True):
             if "all" in recentmessage.lower():
                 try:
                     if room1_light_1:
-                        if room1_light_1 == 0:
+                        if room1_light_1 == 2:
                             room1_light_1 = 1
                             room1_light_1_status = aio.feeds('room1-light-1-status')
                             aio.send_data(room1_light_1_status.key, 'ON')
 
                     if room1_light_2:
-                        if room1_light_2 == 0:
+                        if room1_light_2 == 2:
                             room1_light_2 = 1
                             room1_light_2_status = aio.feeds('room1_light_2_status')
                             aio.send_data(room1_light_2_status.key, 'ON')
 
                     if room1_light_3:
-                        if room1_light_3 == 0:
+                        if room1_light_3 == 2:
                             room1_light_3 = 1
                             room1_light_3_status = aio.feeds('room1_light_3_status')
                             aio.send_data(room1_light_3_status.key, 'ON')
@@ -1337,7 +1382,7 @@ while (True):
 
                 try:
                     if room1_TV_1:
-                        if room1_TV_1 == 0:
+                        if room1_TV_1 == 2:
                             room1_TV_1 = 1
                             room1_TV_1_status = aio.feeds('room1-tv-1-status')
                             aio.send_data(room1_TV_1_status.key, 'ON')
@@ -1347,7 +1392,7 @@ while (True):
 
                 try:
                     if room1_AC_1:
-                        if room1_AC_1 == 0:
+                        if room1_AC_1 == 2:
                             room1_AC_1 = 1
                             room1_AC_1_status = aio.feeds('room1-ac-1-status')
                             aio.send_data(room1_AC_1_status.key, 'ON')
@@ -1357,7 +1402,7 @@ while (True):
 
                 try:
                     if room1_fan_1:
-                        if room1_fan_1 == 0:
+                        if room1_fan_1 == 2:
                             room1_fan_1 = 1
                             room1_fan_1_status = aio.feeds('room1-fan-1-status')
                             aio.send_data(room1_fan_1_status.key, 'ON')
@@ -1367,19 +1412,19 @@ while (True):
 
                 try:
                     if room2_light_1:
-                        if room2_light_1 == 0:
+                        if room2_light_1 == 2:
                             room2_light_1 = 1
                             room2_light_1_status = aio.feeds('room2-light-1-status')
                             aio.send_data(room2_light_1_status.key, 'ON')
 
                     if room2_light_2:
-                        if room2_light_2 == 0:
+                        if room2_light_2 == 2:
                             room2_light_2 = 1
                             room2_light_2_status = aio.feeds('room2_light_2_status')
                             aio.send_data(room2_light_2_status.key, 'ON')
 
                     if room2_light_3:
-                        if room2_light_3 == 0:
+                        if room2_light_3 == 2:
                             room2_light_3 = 1
                             room2_light_3_status = aio.feeds('room2_light_3_status')
                             aio.send_data(room2_light_3_status.key, 'ON')
@@ -1390,7 +1435,7 @@ while (True):
 
                 try:
                     if room2_TV_1:
-                        if room2_TV_1 == 0:
+                        if room2_TV_1 == 2:
                             room2_TV_1 = 1
                             room2_TV_1_status = aio.feeds('room2-tv-1-status')
                             aio.send_data(room2_TV_1_status.key, 'ON')
@@ -1400,7 +1445,7 @@ while (True):
 
                 try:
                     if room2_AC_1:
-                        if room2_AC_1 == 0:
+                        if room2_AC_1 == 2:
                             room2_AC_1 = 1
                             room2_AC_1_status = aio.feeds('room2-ac-1-status')
                             aio.send_data(room2_AC_1_status.key, 'ON')
@@ -1410,7 +1455,7 @@ while (True):
 
                 try:
                     if room2_fan_1:
-                        if room2_fan_1 == 0:
+                        if room2_fan_1 == 2:
                             room2_fan_1 = 1
                             room2_fan_1_status = aio.feeds('room2-fan-1-status')
                             aio.send_data(room2_fan_1_status.key, 'ON')
@@ -1420,19 +1465,19 @@ while (True):
 
                 try:
                     if room3_light_1:
-                        if room3_light_1 == 0:
+                        if room3_light_1 == 2:
                             room3_light_1 = 1
                             room3_light_1_status = aio.feeds('room3-light-1-status')
                             aio.send_data(room3_light_1_status.key, 'ON')
 
                     if room3_light_2:
-                        if room3_light_2 == 0:
+                        if room3_light_2 == 2:
                             room3_light_2 = 1
                             room3_light_2_status = aio.feeds('room3-light-2-status')
                             aio.send_data(room3_light_2_status.key, 'ON')
 
                     if room3_light_3:
-                        if room3_light_3 == 0:
+                        if room3_light_3 == 2:
                             room3_light_3 = 1
                             room3_light_3_status = aio.feeds('room3_light_3_status')
                             aio.send_data(room3_light_3_status.key, 'ON')
@@ -1443,7 +1488,7 @@ while (True):
 
                 try:
                     if room3_TV_1:
-                        if room3_TV_1 == 0:
+                        if room3_TV_1 == 2:
                             room3_TV_1 = 1
                             room3_TV_1_status = aio.feeds('room3-tv-1-status')
                             aio.send_data(room3_TV_1_status.key, 'ON')
@@ -1453,7 +1498,7 @@ while (True):
 
                 try:
                     if room3_AC_1:
-                        if room3_AC_1 == 0:
+                        if room3_AC_1 == 2:
                             room3_AC_1 = 1
                             room3_AC_1_status = aio.feeds('room3-ac-1-status')
                             aio.send_data(room3_AC_1_status.key, 'ON')
@@ -1463,24 +1508,29 @@ while (True):
 
                 try:
                     if room3_fan_1:
-                        if room3_fan_1 == 0:
+                        if room3_fan_1 == 2:
                             room3_fan_1 = 1
-                            room3_fan_1_status = aio.feeds('room3_fan_1_status')
+                            room3_fan_1_status = aio.feeds('room3-fan-1-status')
                             aio.send_data(room3_fan_1_status.key, 'ON')
 
                 except:
                     print("")
                 bot.send_message(chat_id, "All devices are now turned ON!!")
+                continue
 
 
-            else: bot.send_message(chat_id, "INVALID COMMAND, PLEASE TRY AGAIN!!")
+            else:
+                bot.send_message(chat_id, "INVALID COMMAND, PLEASE TRY AGAIN!!")
+                continue
+
+
         if 'off' in recentmessage.lower():
             if "room1" in recentmessage.lower():
                 if "light1" in recentmessage.lower():
                     try:
                         if room1_light_1:
                             if room1_light_1 == 1:
-                                room1_light_1 = 0
+                                room1_light_1 = 2
                                 room1_light_1_status = aio.feeds('room1-light-1-status')
                                 aio.send_data(room1_light_1_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room1 light1 switched OFF!")
@@ -1488,12 +1538,13 @@ while (True):
                                 bot.send_message(chat_id, "Room1 Light1 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light2" in recentmessage.lower():
                     try:
                         if room1_light_2:
                             if room1_light_2 == 1:
-                                room1_light_2 = 0
+                                room1_light_2 = 2
                                 room1_light_2_status = aio.feeds('room1-light-2-status')
                                 aio.send_data(room1_light_2_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room1 light2 switched OFF!")
@@ -1501,12 +1552,13 @@ while (True):
                                 bot.send_message(chat_id, "Room1 Light2 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light3" in recentmessage.lower():
                     try:
                         if room1_light_3:
                             if room1_light_3 == 1:
-                                room1_light_3 = 0
+                                room1_light_3 = 2
                                 room1_light_3_status = aio.feeds('room1_light_3_status')
                                 aio.send_data(room1_light_3_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room1 light3 switched OFF!")
@@ -1514,37 +1566,38 @@ while (True):
                                 bot.send_message(chat_id, "Room1 Light3 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "lights" in recentmessage.lower():
                     bot.send_message(chat_id, "All lights in room1 turned OFF")
                     try:
                         if room1_light_1:
                             if room1_light_1 == 1:
-                                room1_light_1 = 0
+                                room1_light_1 = 2
                                 room1_light_1_status = aio.feeds('room1-light-1-status')
                                 aio.send_data(room1_light_1_status.key, 'OFF')
 
                         if room1_light_2:
                             if room1_light_2 == 1:
-                                room1_light_2 = 0
+                                room1_light_2 = 2
                                 room1_light_2_status = aio.feeds('room1-light-2-status')
                                 aio.send_data(room1_light_2_status.key, 'OFF')
 
                         if room1_light_3:
                             if room1_light_3 == 1:
-                                room1_light_3 = 0
+                                room1_light_3 = 2
                                 room1_light_3_status = aio.feeds('room1_light_3_status')
                                 aio.send_data(room1_light_3_status.key, 'ON')
 
 
                     except:
                         print("")
-
+                    continue
                 if "fan1" in recentmessage.lower() or "fan" in recentmessage.lower():
                     try:
                         if room1_fan_1:
                             if room1_fan_1 == 1:
-                                room1_fan_1 = 0
+                                room1_fan_1 = 2
                                 room1_fan_1_status = aio.feeds('room1_fan_1_status')
                                 aio.send_data(room1_fan_1_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room1 fan switched OFF!")
@@ -1552,12 +1605,13 @@ while (True):
                                 bot.send_message(chat_id, "Room1 fan is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "tv" in recentmessage.lower():
                     try:
                         if room1_TV_1:
                             if room1_TV_1 == 1:
-                                room1_TV_1 = 0
+                                room1_TV_1 = 2
                                 room1_TV_1_status = aio.feeds('room1-tv-1-status')
                                 aio.send_data(room1_TV_1_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room1 TV switched OFF!")
@@ -1565,12 +1619,13 @@ while (True):
                                 bot.send_message(chat_id, "Room1 TV is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "ac" in recentmessage.lower():
                     try:
                         if room1_AC_1:
                             if room1_AC_1 == 1:
-                                room1_AC_1 = 0
+                                room1_AC_1 = 2
                                 room1_AC_1_status = aio.feeds('room1-ac-1-status')
                                 aio.send_data(room1_AC_1_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room1 AC switched OFF!")
@@ -1578,25 +1633,26 @@ while (True):
                                 bot.send_message(chat_id, "Room1 AC is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 else:
                     try:
                         if room1_light_1:
                             if room1_light_1 == 1:
-                                room1_light_1 = 0
+                                room1_light_1 = 2
                                 room1_light_1_status = aio.feeds('room1-light-1-status')
                                 aio.send_data(room1_light_1_status.key, 'OFF')
 
                         if room1_light_2:
                             if room1_light_2 == 1:
-                                room1_light_2 = 0
+                                room1_light_2 = 2
                                 room1_light_2_status = aio.feeds('room1_light_2_status')
                                 aio.send_data(room1_light_2_status.key, 'OFF')
 
                         if room1_light_3:
                             if room1_light_3 == 1:
-                                room1_light_3 = 0
+                                room1_light_3 = 2
                                 room1_light_3_status = aio.feeds('room1_light_3_status')
                                 aio.send_data(room1_light_3_status.key, 'OFF')
 
@@ -1607,7 +1663,7 @@ while (True):
                     try:
                         if room1_TV_1:
                             if room1_TV_1 == 1:
-                                room1_TV_1 = 0
+                                room1_TV_1 = 2
                                 room1_TV_1_status = aio.feeds('room1-tv-1-status')
                                 aio.send_data(room1_TV_1_status.key, 'OFF')
 
@@ -1617,8 +1673,8 @@ while (True):
                     try:
                         if room1_AC_1:
                             if room1_AC_1 == 1:
-                                room1_AC_1 = 0
-                                room1_AC_1_status = aio.feeds('room1-AC-1-status')
+                                room1_AC_1 = 2
+                                room1_AC_1_status = aio.feeds('room1-ac-1-status')
                                 aio.send_data(room1_AC_1_status.key, 'OFF')
 
                     except:
@@ -1627,20 +1683,21 @@ while (True):
                     try:
                         if room1_fan_1:
                             if room1_fan_1 == 1:
-                                room1_fan_1 = 0
+                                room1_fan_1 = 2
                                 room1_fan_1_status = aio.feeds('room1-fan-1-status')
                                 aio.send_data(room1_fan_1_status.key, 'OFF')
 
                     except:
                         print("")
                     bot.send_message(chat_id, "All devices in room 3 are now turned OFF!!")
+                    continue
 
             if "room2" in recentmessage.lower():
                 if "light1" in recentmessage.lower():
                     try:
                         if room2_light_1:
                             if room2_light_1 == 1:
-                                room2_light_1 = 0
+                                room2_light_1 = 2
                                 room2_light_1_status = aio.feeds('room2-light-1-status')
                                 aio.send_data(room2_light_1_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room2 light1 switched OFF!")
@@ -1648,12 +1705,13 @@ while (True):
                                 bot.send_message(chat_id, "Room2 Light1 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light2" in recentmessage.lower():
                     try:
                         if room2_light_2:
                             if room2_light_2 == 1:
-                                room2_light_2 = 0
+                                room2_light_2 = 2
                                 room2_light_2_status = aio.feeds('room2_light_2_status')
                                 aio.send_data(room2_light_2_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room2 light2 switched OFF!")
@@ -1661,102 +1719,108 @@ while (True):
                                 bot.send_message(chat_id, "Room2 Light2 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light3" in recentmessage.lower():
                     try:
                         if room2_light_3:
                             if room2_light_3 == 1:
-                                room2_light_3 = 0
-                                room2_light_3_status = aio.feeds('room1_light_3_status')
+                                room2_light_3 = 2
+                                room2_light_3_status = aio.feeds('room2_light_3_status')
                                 aio.send_data(room2_light_3_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room2 light3 switched OFF!")
                             else:
                                 bot.send_message(chat_id, "Room2 Light3 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "lights" in recentmessage.lower():
                     bot.send_message(chat_id, "All lights in room1 turned OFF")
                     try:
                         if room2_light_1:
                             if room2_light_1 == 1:
-                                room2_light_1 = 0
+                                room2_light_1 = 2
                                 room2_light_1_status = aio.feeds('room2-light-1-status')
                                 aio.send_data(room2_light_1_status.key, 'OFF')
 
                         if room2_light_2:
                             if room2_light_2 == 1:
-                                room2_light_2 = 0
+                                room2_light_2 = 2
                                 room2_light_2_status = aio.feeds('room2-light-2-status')
                                 aio.send_data(room2_light_2_status.key, 'OFF')
 
                         if room2_light_3:
                             if room2_light_3 == 1:
-                                room2_light_3 = 0
+                                room2_light_3 = 2
                                 room2_light_3_status = aio.feeds('room2_light_3_status')
                                 aio.send_data(room2_light_3_status.key, 'OFF')
 
 
                     except:
                         print("")
+                    continue
 
                 if "fan1" in recentmessage.lower() or "fan" in recentmessage.lower():
                     try:
                         if room2_fan_1:
                             if room2_fan_1 == 1:
-                                room2_fan_1 = 0
-                                room2_fan_1_status = aio.feeds('room2_fan_1_status')
+                                room2_fan_1 = 2
+                                room2_fan_1_status = aio.feeds('room2-fan-1-status')
                                 aio.send_data(room2_fan_1_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room2 fan switched OFF!")
                             else:
                                 bot.send_message(chat_id, "Room2 fan is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "tv" in recentmessage.lower():
                     try:
                         if room2_TV_1:
                             if room2_TV_1 == 1:
-                                room2_TV_1 = 0
-                                room2_TV_1_status = aio.feeds('room2-TV-1-status')
+                                room2_TV_1 = 2
+                                room2_TV_1_status = aio.feeds('room2-tv-1-status')
                                 aio.send_data(room2_TV_1_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room2 TV switched OFF!")
                             else:
                                 bot.send_message(chat_id, "Room2 TV is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "ac" in recentmessage.lower():
                     try:
                         if room2_AC_1:
                             if room2_AC_1 == 1:
-                                room2_AC_1 = 0
-                                room2_AC_1_status = aio.feeds('room2_AC_1_status')
+                                room2_AC_1 = 2
+                                room2_AC_1_status = aio.feeds('room2-ac-1-status')
                                 aio.send_data(room2_AC_1_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room2 AC switched OFF!")
                             else:
                                 bot.send_message(chat_id, "Room2 AC is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 else:
                     try:
                         if room2_light_1:
                             if room2_light_1 == 1:
-                                room2_light_1 = 0
+                                room2_light_1 = 2
                                 room2_light_1_status = aio.feeds('room2-light-1-status')
                                 aio.send_data(room2_light_1_status.key, 'OFF')
 
                         if room2_light_2:
                             if room2_light_2 == 1:
-                                room2_light_2 = 0
+                                room2_light_2 = 2
                                 room2_light_2_status = aio.feeds('room2_light_2_status')
                                 aio.send_data(room2_light_2_status.key, 'OFF')
 
                         if room2_light_3:
                             if room2_light_3 == 1:
-                                room2_light_3 = 0
+                                room2_light_3 = 2
                                 room2_light_3_status = aio.feeds('room2_light_3_status')
                                 aio.send_data(room2_light_3_status.key, 'OFF')
 
@@ -1767,7 +1831,7 @@ while (True):
                     try:
                         if room2_TV_1:
                             if room2_TV_1 == 1:
-                                room2_TV_1 = 0
+                                room2_TV_1 = 2
                                 room2_TV_1_status = aio.feeds('room2-tv-1-status')
                                 aio.send_data(room2_TV_1_status.key, 'OFF')
 
@@ -1777,8 +1841,8 @@ while (True):
                     try:
                         if room2_AC_1:
                             if room2_AC_1 == 1:
-                                room2_AC_1 = 0
-                                room2_AC_1_status = aio.feeds('room2_AC_1_status')
+                                room2_AC_1 = 2
+                                room2_AC_1_status = aio.feeds('room2-ac-1-status')
                                 aio.send_data(room2_AC_1_status.key, 'OFF')
 
                     except:
@@ -1787,7 +1851,7 @@ while (True):
                     try:
                         if room2_fan_1:
                             if room2_fan_1 == 1:
-                                room2_fan_1 = 0
+                                room2_fan_1 = 2
                                 room2_fan_1_status = aio.feeds('room2-fan-1-status')
                                 aio.send_data(room2_fan_1_status.key, 'OFF')
 
@@ -1795,13 +1859,14 @@ while (True):
                         print("")
 
                     bot.send_message(chat_id, "All devices in room 2 are now turned OFF!!")
+                    continue
 
             if "room3" in recentmessage.lower():
                 if "light1" in recentmessage.lower():
                     try:
                         if room3_light_1:
                             if room3_light_1 == 1:
-                                room3_light_1 = 0
+                                room3_light_1 = 2
                                 room3_light_1_status = aio.feeds('room3-light-1-status')
                                 aio.send_data(room3_light_1_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room3 light1 switched OFF!")
@@ -1809,12 +1874,13 @@ while (True):
                                 bot.send_message(chat_id, "Room3 Light1 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light2" in recentmessage.lower():
                     try:
                         if room3_light_2:
                             if room3_light_2 == 1:
-                                room3_light_2 = 0
+                                room3_light_2 = 2
                                 room3_light_2_status = aio.feeds('room3_light_2_status')
                                 aio.send_data(room3_light_2_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room3 light2 switched OFF!")
@@ -1822,12 +1888,13 @@ while (True):
                                 bot.send_message(chat_id, "Room3 Light2 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "light3" in recentmessage.lower():
                     try:
                         if room3_light_3:
                             if room3_light_3 == 1:
-                                room3_light_3 = 0
+                                room3_light_3 = 2
                                 room3_light_3_status = aio.feeds('room3_light_3_status')
                                 aio.send_data(room3_light_3_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room3 light3 switched OFF!")
@@ -1835,37 +1902,38 @@ while (True):
                                 bot.send_message(chat_id, "Room3 Light3 is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "lights" in recentmessage.lower():
                     bot.send_message(chat_id, "All lights in room1 turned OFF")
                     try:
                         if room3_light_1:
                             if room3_light_1 == 1:
-                                room3_light_1 = 0
+                                room3_light_1 = 2
                                 room3_light_1_status = aio.feeds('room3-light-1-status')
                                 aio.send_data(room3_light_1_status.key, 'OFF')
 
                         if room3_light_2:
                             if room3_light_2 == 1:
-                                room3_light_2 = 0
+                                room3_light_2 = 2
                                 room3_light_2_status = aio.feeds('room3_light_2_status')
                                 aio.send_data(room3_light_2_status.key, 'OFF')
 
                         if room3_light_3:
                             if room3_light_3 == 1:
-                                room3_light_3 = 0
+                                room3_light_3 = 2
                                 room3_light_3_status = aio.feeds('room3_light_3_status')
                                 aio.send_data(room3_light_3_status.key, 'OFF')
 
 
                     except:
                         print("")
-
+                    continue
                 if "fan1" in recentmessage.lower() or "fan" in recentmessage.lower():
                     try:
                         if room3_fan_1:
                             if room3_fan_1 == 1:
-                                room3_fan_1 = 0
+                                room3_fan_1 = 2
                                 room3_fan_1_status = aio.feeds('room3_fan_1_status')
                                 aio.send_data(room3_fan_1_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room3 fan switched OFF!")
@@ -1873,12 +1941,13 @@ while (True):
                                 bot.send_message(chat_id, "Room3 fan is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "tv" in recentmessage.lower():
                     try:
                         if room3_TV_1:
                             if room3_TV_1 == 1:
-                                room3_TV_1 = 0
+                                room3_TV_1 = 2
                                 room3_TV_1_status = aio.feeds('room3-tv-1-status')
                                 aio.send_data(room3_TV_1_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room3 TV switched OFF!")
@@ -1886,12 +1955,13 @@ while (True):
                                 bot.send_message(chat_id, "Room3 TV is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
                 if "ac" in recentmessage.lower():
                     try:
                         if room3_AC_1:
                             if room3_AC_1 == 1:
-                                room3_AC_1 = 0
+                                room3_AC_1 = 2
                                 room3_AC_1_status = aio.feeds('room3-ac-1-status')
                                 aio.send_data(room3_AC_1_status.key, 'OFF')
                                 bot.send_message(chat_id, "Room3 AC switched OFF!")
@@ -1899,25 +1969,26 @@ while (True):
                                 bot.send_message(chat_id, "Room3 AC is already OFF")
                     except:
                         bot.send_message(chat_id, "Inavalid device!!Please try again!")
+                    continue
 
 
                 else:
                     try:
                         if room3_light_1:
                             if room3_light_1 == 1:
-                                room3_light_1 = 0
-                                room3_light_1_status = aio.feeds('room3-light-1status')
+                                room3_light_1 = 2
+                                room3_light_1_status = aio.feeds('room3-light-1-status')
                                 aio.send_data(room3_light_1_status.key, 'OFF')
 
                         if room3_light_2:
                             if room3_light_2 == 1:
-                                room3_light_2 = 0
+                                room3_light_2 = 2
                                 room3_light_2_status = aio.feeds('room3_light_2_status')
                                 aio.send_data(room3_light_2_status.key, 'OFF')
 
                         if room3_light_3:
                             if room3_light_3 == 1:
-                                room3_light_3 = 0
+                                room3_light_3 = 2
                                 room3_light_3_status = aio.feeds('room3_light_3_status')
                                 aio.send_data(room3_light_3_status.key, 'OFF')
 
@@ -1928,7 +1999,7 @@ while (True):
                     try:
                         if room3_TV_1:
                             if room3_TV_1 == 1:
-                                room3_TV_1 = 0
+                                room3_TV_1 = 2
                                 room3_TV_1_status = aio.feeds('room3-tv-1-status')
                                 aio.send_data(room3_TV_1_status.key, 'OFF')
 
@@ -1938,7 +2009,7 @@ while (True):
                     try:
                         if room3_AC_1:
                             if room3_AC_1 == 1:
-                                room3_AC_1 = 0
+                                room3_AC_1 = 2
                                 room3_AC_1_status = aio.feeds('room3-ac-1-status')
                                 aio.send_data(room3_AC_1_status.key, 'OFF')
 
@@ -1948,31 +2019,32 @@ while (True):
                     try:
                         if room3_fan_1:
                             if room3_fan_1 == 1:
-                                room3_fan_1 = 0
+                                room3_fan_1 = 2
                                 room3_fan_1_status = aio.feeds('room3_fan_1_status')
                                 aio.send_data(room3_fan_1_status.key, 'OFF')
 
                     except:
                         print("")
                     bot.send_message(chat_id, "All devices in room 3 are now turned OFF!!")
+                    continue
 
             if "all" in recentmessage.lower():
                 try:
                     if room1_light_1:
                         if room1_light_1 == 1:
-                            room1_light_1 = 0
+                            room1_light_1 = 2
                             room1_light_1_status = aio.feeds('room1-light-1-status')
                             aio.send_data(room1_light_1_status.key, 'OFF')
 
                     if room1_light_2:
                         if room1_light_2 == 1:
-                            room1_light_2 = 0
+                            room1_light_2 = 2
                             room1_light_2_status = aio.feeds('room1-light-2-status')
                             aio.send_data(room1_light_2_status.key, 'OFF')
 
                     if room1_light_3:
                         if room1_light_3 == 1:
-                            room1_light_3 = 0
+                            room1_light_3 = 2
                             room1_light_3_status = aio.feeds('room1-light-3-status')
                             aio.send_data(room1_light_3_status.key, 'OFF')
 
@@ -1983,8 +2055,8 @@ while (True):
                 try:
                     if room1_TV_1:
                         if room1_TV_1 == 1:
-                            room1_TV_1 = 0
-                            room1_TV_1_status = aio.feeds('room1-tv-1status')
+                            room1_TV_1 = 2
+                            room1_TV_1_status = aio.feeds('room1-tv-1-status')
                             aio.send_data(room1_TV_1_status.key, 'OFF')
 
                 except:
@@ -1993,7 +2065,7 @@ while (True):
                 try:
                     if room1_AC_1:
                         if room1_AC_1 == 1:
-                            room1_AC_1 = 0
+                            room1_AC_1 = 2
                             room1_AC_1_status = aio.feeds('room1-ac-1-status')
                             aio.send_data(room1_AC_1_status.key, 'OFF')
 
@@ -2003,7 +2075,7 @@ while (True):
                 try:
                     if room1_fan_1:
                         if room1_fan_1 == 1:
-                            room1_fan_1 = 0
+                            room1_fan_1 = 2
                             room1_fan_1_status = aio.feeds('room1_fan_1_status')
                             aio.send_data(room1_fan_1_status.key, 'OFF')
 
@@ -2013,19 +2085,19 @@ while (True):
                 try:
                     if room2_light_1:
                         if room2_light_1 == 1:
-                            room2_light_1 = 0
+                            room2_light_1 = 2
                             room2_light_1_status = aio.feeds('room2-light-1-status')
                             aio.send_data(room2_light_1_status.key, 'OFF')
 
                     if room2_light_2:
                         if room2_light_2 == 1:
-                            room2_light_2 = 0
+                            room2_light_2 = 2
                             room2_light_2_status = aio.feeds('room2_light_2_status')
                             aio.send_data(room2_light_2_status.key, 'OFF')
 
                     if room2_light_3:
                         if room2_light_3 == 1:
-                            room2_light_3 = 0
+                            room2_light_3 = 2
                             room2_light_3_status = aio.feeds('room2_light_3_status')
                             aio.send_data(room2_light_3_status.key, 'OFF')
 
@@ -2036,7 +2108,7 @@ while (True):
                 try:
                     if room2_TV_1:
                         if room2_TV_1 == 1:
-                            room2_TV_1 = 0
+                            room2_TV_1 = 2
                             room2_TV_1_status = aio.feeds('room2-tv-1-status')
                             aio.send_data(room2_TV_1_status.key, 'OFF')
 
@@ -2046,8 +2118,8 @@ while (True):
                 try:
                     if room2_AC_1:
                         if room2_AC_1 == 1:
-                            room2_AC_1 = 0
-                            room2_AC_1_status = aio.feeds('room2-AC_1_status')
+                            room2_AC_1 = 2
+                            room2_AC_1_status = aio.feeds('room2-ac-1-status')
                             aio.send_data(room2_AC_1_status.key, 'OFF')
 
                 except:
@@ -2056,7 +2128,7 @@ while (True):
                 try:
                     if room2_fan_1:
                         if room2_fan_1 == 1:
-                            room2_fan_1 = 0
+                            room2_fan_1 = 2
                             room2_fan_1_status = aio.feeds('room2-fan-1-status')
                             aio.send_data(room2_fan_1_status.key, 'OFF')
 
@@ -2066,19 +2138,19 @@ while (True):
                 try:
                     if room3_light_1:
                         if room3_light_1 == 1:
-                            room3_light_1 = 0
+                            room3_light_1 = 2
                             room3_light_1_status = aio.feeds('room3-light-1-status')
                             aio.send_data(room3_light_1_status.key, 'OFF')
 
                     if room3_light_2:
                         if room3_light_2 == 1:
-                            room3_light_2 = 0
+                            room3_light_2 = 2
                             room3_light_2_status = aio.feeds('room3_light_2_status')
                             aio.send_data(room3_light_2_status.key, 'OFF')
 
                     if room3_light_3:
                         if room3_light_3 == 1:
-                            room3_light_3 = 0
+                            room3_light_3 = 2
                             room3_light_3_status = aio.feeds('room3_light_3_status')
                             aio.send_data(room3_light_3_status.key, 'OFF')
 
@@ -2089,7 +2161,7 @@ while (True):
                 try:
                     if room3_TV_1:
                         if room3_TV_1 == 1:
-                            room3_TV_1 = 0
+                            room3_TV_1 = 2
                             room3_TV_1_status = aio.feeds('room3-tv-1-status')
                             aio.send_data(room3_TV_1_status.key, 'OFF')
 
@@ -2099,7 +2171,7 @@ while (True):
                 try:
                     if room3_AC_1:
                         if room3_AC_1 == 1:
-                            room3_AC_1 = 0
+                            room3_AC_1 = 2
                             room3_AC_1_status = aio.feeds('room3-ac-1-status')
                             aio.send_data(room3_AC_1_status.key, 'OFF')
 
@@ -2109,15 +2181,17 @@ while (True):
                 try:
                     if room3_fan_1:
                         if room3_fan_1 == 1:
-                            room3_fan_1 = 0
+                            room3_fan_1 = 2
                             room3_fan_1_status = aio.feeds('room3-fan-1-status')
                             aio.send_data(room3_fan_1_status.key, 'OFF')
 
                 except:
                     print("")
                 bot.send_message(chat_id, "All devices are now turned OFF!!")
+                continue
             else:
                 bot.send_message(chat_id, "INVALID COMMAND, PLEASE TRY AGAIN!!")
+                continue
 
 
 
@@ -2127,21 +2201,27 @@ while (True):
                 try:
                     if room1_fan_1:
                         bot.send_message(chat_id, "room1 fan speed increased")
-                except: bot.send_message(chat_id, "There is no fan in room 1!!")
+                except:
+                    bot.send_message(chat_id, "There is no fan in room 1!!")
+                continue
 
 
             if "room2" in recentmessage.lower():
                 try:
                     if room2_fan_1:
                         bot.send_message(chat_id, "room2 fan speed increased")
-                except: bot.send_message(chat_id, "There is no fan in room 2!!")
+                except:
+                    bot.send_message(chat_id, "There is no fan in room 2!!")
+                continue
 
 
             if "room3" in recentmessage.lower():
                 try:
                     if room3_fan_1:
                         bot.send_message(chat_id, "room3 fan speed increased")
-                except: bot.send_message(chat_id, "There is no fan in room 3!!")
+                except:
+                    bot.send_message(chat_id, "There is no fan in room 3!!")
+                continue
 
 
         if 'low' in recentmessage.lower():
@@ -2152,6 +2232,7 @@ while (True):
                         bot.send_message(chat_id, "room1 fan speed decreased")
                 except:
                     bot.send_message(chat_id, "There is no fan in room 1!!")
+                continue
 
             if "room2" in recentmessage.lower():
                 try:
@@ -2159,6 +2240,7 @@ while (True):
                         bot.send_message(chat_id, "room2 fan speed decreased")
                 except:
                     bot.send_message(chat_id, "There is no fan in room 2!!")
+                continue
 
             if "room3" in recentmessage.lower():
                 try:
@@ -2166,6 +2248,7 @@ while (True):
                         bot.send_message(chat_id, "room3 fan speed decreased")
                 except:
                     bot.send_message(chat_id, "There is no fan in room 3!!")
+                continue
 
 
     else:

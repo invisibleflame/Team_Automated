@@ -3,15 +3,17 @@
 
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
+from chatterbot.response_selection import get_first_response
+import time
 import chatterbot
 import chatterbot_corpus
 bot = ChatBot('Bot',
                   storage_adapter='chatterbot.storage.SQLStorageAdapter',
     logic_adapters=[
         {
-            "import_path": "chatterbot.logic.BestMatch",
-            "statement_comparison_function": chatterbot.comparisons.levenshtein_distance,
-            "response_selection_method": chatterbot.response_selection.get_first_response
+            'import_path': "chatterbot.logic.BestMatch",
+            'statement_comparison_function': 'chatterbot.comparisons.levenshtein_distance',
+            'response_selection_method': get_first_response
         }
     ],
     trainer='chatterbot.trainers.ListTrainer')
@@ -61,20 +63,21 @@ omkar3=["Hello",
 "Bye",
 "Bye, It was great working for you"]
 
-fhand1=open('conversations.yml').readlines()
-fhand2=open('conversation.yml').readlines()
-fhand3=open('Artificial_intelligence.yml').readlines()
-fhand4=open('conversation.yml').readlines()
-fhand5=open('emotion.yml').readlines()
-fhand6=open('film.yml').readlines()
-fhand7=open('food.yml').readlines()
-fhand9=open('GK.yml').readlines()
-fhand10=open('IT.yml').readlines()
-fhand11=open('jokes_fun.yml').readlines()
-fhand12=open('market_money.yml').readlines()
-fhand13=open('psychology.yml').readlines()
-fhand14=open('space_and_science.yml').readlines()
-fhand15=open('Sport_games.yml').readlines()
+fhand1=open('my-data/conversation.yml').readlines()
+fhand2=open('my-data/conversation.yml').readlines()
+fhand3=open('my-data/Artificial_intelligence.yml').readlines()
+fhand4=open('my-data/conversation.yml').readlines()
+fhand5=open('my-data/emotion.yml').readlines()
+fhand6=open('my-data/film.yml').readlines()
+fhand7=open('my-data/food.yml').readlines()
+fhand9=open('my-data/GK.yml').readlines()
+fhand10=open('my-data/IT.yml').readlines()
+fhand11=open('my-data/jokes_fun.yml').readlines()
+fhand12=open('my-data/market_money.yml').readlines()
+fhand13=open('my-data/psychology.yml').readlines()
+fhand14=open('my-data/space_and_science.yml').readlines()
+fhand15=open('my-data/Sport_games.yml').readlines()
+fhand16=open('Movie.txt').readlines()
 
 trainer.train(fhand1)
 trainer.train(fhand2)
@@ -90,11 +93,14 @@ trainer.train(fhand12)
 trainer.train(fhand13)
 trainer.train(fhand14)
 trainer.train(fhand15)
+trainer.train(fhand16)
 trainer.train(omkar1)
 trainer.train(omkar2)
 trainer.train(omkar3)
 
 while True :
   user_input = input()
-  bot_response = bot.get_response(user_input)
+  bot_response = str(bot.get_response(user_input))
   print(bot_response)
+
+
