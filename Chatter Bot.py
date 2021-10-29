@@ -1,5 +1,6 @@
 #!pip install chatterbot
 #!pip install chatterbot-corpus
+
 from chatterbot import ChatBot
 from chatterbot.trainers import ListTrainer
 import chatterbot
@@ -18,6 +19,7 @@ trainer = ListTrainer(bot)
 
 omkar1=["Hi",
 "Hello, how are you ?",
+        "I am happy",
 "I am fine, what about you ?",
 "I am fine too",
 "What you think of life ?",
@@ -59,15 +61,6 @@ omkar3=["Hello",
 "Bye",
 "Bye, It was great working for you"]
 
-omkar4=["Hi there",
-"Hello, how it's going?",
-"A bit sad and worried",
-"Just be patient, things will improve",
-"Can I ask you a Question?",
-"What is your Question",
-"In which country do you live",
-"I was made in India"]
-
 fhand1=open('conversations.yml').readlines()
 fhand2=open('conversation.yml').readlines()
 fhand3=open('Artificial_intelligence.yml').readlines()
@@ -100,7 +93,7 @@ trainer.train(fhand15)
 trainer.train(omkar1)
 trainer.train(omkar2)
 trainer.train(omkar3)
-trainer.train(omkar4)
+
 while True :
   user_input = input()
   bot_response = bot.get_response(user_input)
