@@ -4,6 +4,7 @@
 #!pip install chatterbot
 #!pip install chatterbot_corpus
 #!pip install string
+import numpy as np
 TOKEN = '1123378208:AAFnDmS4CA5aRsJYHYfvm8e-s_E6YIRYxxo'
 #TOKEN = '1237103929:AAH-UDwFKEuS_NlZGJifnv2tavcTXsF0gg4'
 import telegram
