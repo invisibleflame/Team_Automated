@@ -39,7 +39,7 @@
 # server.send_message(msg)
 # server.quit()
 import string
-
+import numpy as np
 # def find_substring(needle, haystack):
 #   search_start = 0
 #   while (search_start < len(haystack)):
